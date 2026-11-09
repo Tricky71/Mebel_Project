@@ -1,0 +1,205 @@
+/* ==========================================================================
+   faq.css — «Частые вопросы»: аккордеон на нативном <details>/<summary>.
+   За образец структуры взят блок dm-home-faq (dm-group63.ru), но оформление
+   собрано из токенов и приёмов этого проекта: фон #D9D9D9, eyebrow #5C5C5C,
+   H2 как в process, разделители и индикатор — акцентом.
+   Нативный <details> выбран из-за AGENT.md: работает без JS, CSP-safe,
+   доступен с клавиатуры и скринридеров без ARIA-костылей.
+   Mobile-First: base 390 -> 768 -> 1200.
+   ========================================================================== */
+
+.faq {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+}
+
+.faq__inner {
+  padding-top: var(--space-section-mobile);
+  padding-bottom: var(--space-section-mobile);
+}
+
+.faq__eyebrow {
+  color: var(--color-text-muted-dark);
+}
+
+.faq__title {
+  min-width: 0;
+  margin-top: 16px;
+  overflow-wrap: break-word;
+  font-size: var(--font-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+  color: #918e8e; /* как .faq__eyebrow: приглушённый серый */
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.faq__lead {
+  min-width: 0;
+  max-width: 52ch;
+  margin-top: 20px;
+  overflow-wrap: break-word;
+  font-size: var(--font-body);
+  font-weight: var(--font-weight-light);
+  line-height: var(--lh-body);
+}
+
+.faq__lead:empty {
+  display: none; /* defensive: пустой лид не оставляет дыры */
+}
+
+.faq__list {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-top: 40px;
+  padding: 0;
+  list-style: none;
+}
+
+.faq__item {
+  min-width: 0;
+  border-top: 1px solid var(--color-text-dark);
+}
+
+.faq__item:last-child {
+  border-bottom: 1px solid var(--color-text-dark);
+}
+
+.faq__details {
+  min-width: 0;
+}
+
+/* --- Вопрос: <summary> = кнопка аккордеона --- */
+.faq__question {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 0;
+  padding: 20px 0;
+  cursor: pointer;
+  list-style: none; /* убираем маркер браузера */
+}
+
+/* В некоторых браузерах summary получает display: list-item — фиксируем flex */
+.faq__question::marker {
+  content: "";
+}
+
+.faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.faq__question:focus-visible {
+  outline: 2px solid var(--color-text-dark);
+  outline-offset: 3px;
+}
+
+.faq__question-text {
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: var(--font-step-title);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+}
+
+/* --- Индикатор: плюс, при раскрытии поворачивается в минус --- */
+.faq__icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  color: var(--color-accent);
+  transition: transform var(--transition-base);
+}
+
+.faq__icon::before,
+.faq__icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: currentColor;
+  transform: translate(-50%, -50%);
+}
+
+.faq__icon::before {
+  width: 16px;
+  height: 2px; /* горизонтальная черта */
+}
+
+.faq__icon::after {
+  width: 2px;
+  height: 16px; /* вертикальная: вместе дают «+» */
+}
+
+/* Раскрытый пункт: вертикальная черта убирается → «−» */
+.faq__details[open] .faq__icon::after {
+  opacity: 0;
+}
+
+.faq__details[open] .faq__icon {
+  transform: rotate(180deg);
+}
+
+/* --- Ответ --- */
+.faq__answer {
+  min-width: 0;
+  padding-bottom: 24px;
+}
+
+.faq__answer p {
+  min-width: 0;
+  max-width: 72ch;
+  overflow-wrap: break-word;
+  font-size: var(--font-body);
+  font-weight: var(--font-weight-light);
+  line-height: var(--lh-body);
+}
+
+.faq__answer p + p {
+  margin-top: 14px;
+}
+
+/* --- >=768: крупнее вертикальный ритм --- */
+@media (min-width: 768px) {
+  .faq__list {
+    margin-top: 56px;
+  }
+
+  .faq__question {
+    padding: 26px 0;
+    gap: 24px;
+  }
+
+  .faq__answer {
+    padding-bottom: 32px;
+  }
+}
+
+/* --- >=1200: широкий ритм, ответ не растягивается на всю строку --- */
+@media (min-width: 1200px) {
+  .faq__list {
+    margin-top: 72px;
+  }
+
+  .faq__question {
+    padding: 32px 0;
+  }
+
+  .faq__answer {
+    padding-bottom: 40px;
+  }
+
+  .faq__answer p {
+    max-width: 68ch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__icon {
+    transition: none;
+  }
+}

@@ -1,0 +1,382 @@
+﻿/* ==========================================================================
+   header.css вЂ” С€Р°РїРєР° Рё РЅР°РІРёРіР°С†РёСЏ
+   Base/768 РїРµСЂРµРЅРµСЃРµРЅС‹ РёР· СЂРµС„РµСЂРµРЅСЃР°; >=1200 РїРµСЂРµРїРёСЃР°РЅРѕ: РїСЂРѕР·СЂР°С‡РЅР°СЏ С€Р°РїРєР°, Р»РѕРіРѕС‚РёРї, Р“РћР РР—РћРќРўРђР›Р¬РќРћР• РјРµРЅСЋ, РєРѕРЅС‚Р°РєС‚С‹ СЃРїСЂР°РІР°.
+   ========================================================================== */
+
+/* --- Base 390: РєСЂР°СЃРЅС‹Р№ Р±Р°СЂ 80px, РѕРІРµСЂР»РµР№ РїРѕРІРµСЂС… hero --- */
+.site-header {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: var(--z-header);
+  max-width: 1920px; /* РєР°Рї РЅР° СѓР»СЊС‚СЂР°С€РёСЂРѕРєРёС…, С†РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С‡РµСЂРµР· auto-margin */
+  margin: 0 auto;
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  min-height: var(--space-header-bar);
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+
+.site-header__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto; /* зазор до бургера ~63px по экспорту */
+  line-height: 0;
+  text-decoration: none;
+}
+
+/* Логотип-знак 40x40: квадратная иконка шкафа. Ширина задаётся токеном,
+   height: auto сохраняет пропорции квадрата (не сплющивает). */
+.site-header__logo img {
+  width: var(--logo-size);
+  max-width: 100%;
+  height: auto;
+  flex: 0 0 auto;
+}
+
+/* Текст логотипа рядом со знаком. aria-hidden — доступное имя даёт
+   aria-label ссылки, поэтому дубль для скринридера не нужен. */
+.site-header__logo-text {
+  font-family: var(--font-heading);
+  font-size: var(--font-logo-text);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-surface); /* на красном баре <1200 */
+  /* defensive: очень узкие экраны — текст ужимается, а не выталкивает бургер */
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Акцентная часть названия («Проект»).
+   <1200 — белая: на красном баре акцентный красный даёт контраст 1:1 и не читается.
+   >=1200 — акцентная: --color-accent-text-dark на тёмном фоне (по токенам проекта). */
+.site-header__logo-text-accent {
+  color: inherit;
+}
+
+/* --- Совсем узкие экраны (<360): текст мельче, чтобы влезть с бургером --- */
+@media (max-width: 359px) {
+  .site-header__logo-text {
+    font-size: 0.8125rem; /* 13 */
+  }
+
+  .site-header__logo {
+    gap: 8px;
+  }
+}
+
+/* Р”РІР° РІР°СЂРёР°РЅС‚Р° Р»РѕРіРѕС‚РёРїР°: РЅР° РєСЂР°СЃРЅРѕРј Р±Р°СЂРµ (<1200) Рё РЅР° РїСЂРѕР·СЂР°С‡РЅРѕР№ С€Р°РїРєРµ (>=1200) */
+.site-header__logo-img--dark {
+  display: none;
+}
+
+/* РљРѕРЅС‚Р°РєС‚С‹ РґРµСЃРєС‚РѕРїР°: СЃРєСЂС‹С‚С‹ РІ СЂРµР¶РёРјР°С… <1200 */
+.site-header__contacts {
+  display: none;
+}
+
+/* --- Р‘СѓСЂРіРµСЂ 28x20 РІ С…РёС‚-Р·РѕРЅРµ 44x44 --- */
+.site-header__burger {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: var(--burger-hit);
+  height: var(--burger-hit);
+  margin-right: -8px; /* РєРѕРјРїРµРЅСЃР°С†РёСЏ С…РёС‚-Р·РѕРЅС‹ Рє РєСЂР°СЋ Р±Р°СЂР° 20px */
+}
+
+.site-header__burger-line {
+  position: relative;
+  display: block;
+  width: 22px; /* СЃСЂРµРґРЅСЏСЏ Р»РёРЅРёСЏ СѓРєРѕСЂРѕС‡РµРЅР° Рё РїСЂРёР¶Р°С‚Р° РІРїСЂР°РІРѕ, РєР°Рє РІ СЌРєСЃРїРѕСЂС‚Рµ */
+  height: var(--burger-line);
+  margin-left: 6px;
+  background-color: var(--color-surface);
+}
+
+.site-header__burger-line::before,
+.site-header__burger-line::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  width: var(--burger-width);
+  height: var(--burger-line);
+  background-color: var(--color-surface);
+  transition: transform var(--transition-base), top var(--transition-base), bottom var(--transition-base);
+}
+
+.site-header__burger-line::before {
+  top: -8px;
+}
+
+.site-header__burger-line::after {
+  bottom: -8px;
+}
+
+/* РљСЂРµСЃС‚РёРє РѕС‚РєСЂС‹С‚РѕРіРѕ РјРµРЅСЋ */
+.site-header.is-open .site-header__burger-line {
+  background-color: transparent;
+}
+
+.site-header.is-open .site-header__burger-line::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.site-header.is-open .site-header__burger-line::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+/* --- РќР°РІРёРіР°С†РёСЏ: СЃРєСЂС‹С‚Р°; РѕС‚РєСЂС‹С‚РѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ вЂ” В§5.1 --- */
+.site-nav {
+  display: none;
+}
+
+.site-nav.is-open {
+  position: fixed;
+  top: var(--space-header-bar);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100svh - var(--space-header-bar));
+  padding-top: var(--space-menu-top);
+  background-color: var(--color-accent);
+}
+
+.site-nav__list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-menu-gap);
+}
+
+  .site-nav__link {
+    display: flex;
+    align-items: center;
+    min-height: var(--burger-hit);
+    font-size: var(--font-menu);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--lh-menu);
+    color: var(--color-surface);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .site-nav__link:hover {
+    color: var(--color-accent);
+  }
+
+/* --- >=1200: РїСЂРѕР·СЂР°С‡РЅР°СЏ С€Р°РїРєР° РїРѕРІРµСЂС… hero, Р“РћР РР—РћРќРўРђР›Р¬РќРћР• РјРµРЅСЋ (С‚СЂРµР±РѕРІР°РЅРёСЏ R-22, R-23) ---
+
+   Р Р°СЃРєР»Р°РґРєР°: Р»РѕРіРѕС‚РёРї | РјРµРЅСЋ (flex, РїРѕ С†РµРЅС‚СЂСѓ) | С‚РµР»РµС„РѕРЅ + WhatsApp СЃРїСЂР°РІР°. */
+
+@media (min-width: 1200px) {
+
+  .site-header {
+
+    background-color: transparent;
+
+  }
+
+
+
+  .site-header__inner {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: clamp(24px, 3vw, 48px);
+
+    min-height: var(--space-header-bar);
+
+    padding-top: 20px;
+
+    padding-bottom: 20px;
+    width: min(100% - var(--container-padding-desktop) * 2, 1600px);
+    margin-inline: auto;
+
+  }
+
+
+
+  .site-header__logo {
+
+    margin-right: 0;
+
+  }
+
+
+
+  .site-header__logo-img--bar {
+
+    display: none; /* Р»РѕРіРѕС‚РёРї РЅР° РєСЂР°СЃРЅРѕРј вЂ” С‚РѕР»СЊРєРѕ РґР»СЏ Р±Р°СЂР° <1200 */
+
+  }
+
+
+
+  .site-header__logo-img--dark {
+
+    display: block;
+
+  }
+
+  /* >=1200: шапка прозрачная поверх тёмного hero — текст логотипа светлый */
+  .site-header__logo-text {
+
+    color: var(--color-text-light);
+
+  }
+
+  /* «Проект» акцентным: #DC8D69 на #232323 = 6,03:1 (AA) — токен проекта */
+  .site-header__logo-text-accent {
+
+    color: var(--color-accent-text-dark);
+
+  }
+
+
+
+  .site-header__burger {
+
+    display: none;
+
+  }
+
+
+
+  .site-nav {
+
+    display: block;
+
+    flex: 1 1 auto;
+
+    min-width: 0;
+
+  }
+
+
+
+  .site-nav__list {
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px var(--space-nav-gap);
+
+  }
+
+
+
+  .site-nav__link {
+    position: relative;
+    min-height: var(--burger-hit);
+    font-size: var(--font-nav);
+    line-height: var(--lh-tight);
+    color: var(--color-text-light);
+    text-decoration: none;
+  }
+
+  .site-nav__link:hover,
+  .site-nav__link:focus-visible,
+  .site-nav__link[aria-current="true"] {
+    color: var(--color-accent);
+  }
+
+
+
+  .site-header__contacts {
+
+    display: flex;
+
+    flex: 0 0 auto;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    min-width: 0;
+
+  }
+
+
+
+  .site-header__phone {
+
+    font-size: var(--font-contact);
+
+    font-weight: var(--font-weight-bold);
+
+    line-height: var(--lh-tight);
+
+    color: var(--color-text-light);
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+  }
+
+
+
+  .site-header__tg {
+
+    margin-top: 3px;
+
+    font-size: var(--font-tg);
+
+    font-weight: var(--font-weight-regular);
+
+    line-height: 1;
+
+    letter-spacing: var(--ls-link);
+
+    color: var(--color-surface);
+
+    text-decoration: underline;
+
+    text-underline-offset: 2px;
+
+  }
+
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .site-header__burger-line::before,
+
+  .site-header__burger-line::after,
+
+  .site-nav__link::before {
+
+    transition: none;
+
+  }
+
+}
+
+

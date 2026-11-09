@@ -1,0 +1,163 @@
+/* ==========================================================================
+   contacts.css — секция Contacts (карточка + карта-плейсхолдер)
+   Перенесено из референса (tricky71.github.io/Mebel_br) 1-в-1; изменены только имена блоков и токены цвета. Manrope заменён на Inter.
+   ========================================================================== */
+
+.contacts {
+  background-color: var(--color-bg-dark); /* рамка секции grey-14 */
+  color: var(--color-text-light);
+  padding-top: clamp(32px, 8vw, 45px); /* верхний отступ секции (уменьшен вдвое) */
+}
+
+/* --- base 390: столбец (карточка -> карта) --- */
+.contacts__inner {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Отступ под eyebrow до карточки контактов */
+.contacts__eyebrow {
+  margin-bottom: clamp(20px, 3vw, 32px);
+}
+
+/* Карточка base — бокса нет (фон секции), без внутренних отступов */
+.contacts__card {
+  display: flex;
+  flex-direction: column; /* пункты контактов стопкой на всех ширинах */
+  gap: var(--space-contact-gap); /* зазор между пунктами */
+  min-width: 0;
+  padding: 0;
+}
+
+/* Пункты контактов: горизонтально в один ряд */
+.ui-contact-card__item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.ui-contact-card__title {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: break-word;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem; /* 13px — подпись мельче значения */
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-accent); /* акцентный цвет подписи */
+  text-transform: uppercase;
+}
+
+/* Значения контактов: крупные, белые */
+.ui-contact-card__address,
+.ui-contact-card__phone,
+.ui-contact-card__mail {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: break-word;
+  font-family: var(--font-sans);
+  font-size: 1.5rem; /* 24px — 32px минус 25% */
+  font-weight: var(--font-weight-regular);
+  line-height: 1.2;
+  color: var(--color-surface); /* белый */
+  text-decoration: none;
+}
+
+.ui-contact-card__mail {
+  overflow-wrap: anywhere; /* длинные адреса не распирают карточку */
+}
+
+.ui-contact-card__body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  font-style: normal; /* сброс браузерного italic у address */
+  font-family: var(--font-sans);
+  font-size: var(--font-contact-text); /* 14 base -> 18 */
+  font-weight: var(--font-weight-light);
+  line-height: var(--lh-contact-text);
+  color: var(--color-surface);
+}
+
+.ui-contact-card__phone,
+.ui-contact-card__email {
+  display: block;
+  min-width: 0;
+  text-decoration: none; /* в макете plain-текст, без подчеркиваний */
+}
+
+.ui-contact-card__email {
+  overflow-wrap: anywhere; /* длинные адреса не распирают 460/350 */
+}
+
+.ui-contact-card__address,
+.ui-contact-card__hours {
+  min-width: 0;
+  margin: 0; /* единый ритм lh, без групповых зазоров (как <br/> в экспорте) */
+  overflow-wrap: break-word;
+}
+
+.ui-contact-card__address:empty,
+.ui-contact-card__hours:empty {
+  display: none; /* defensive: пустые p схлопываются */
+}
+
+/* Карта base: в потоке под карточкой, full-bleed, высота fluid 390->600 */
+.contacts__map {
+  position: relative;
+  min-width: 0;
+  height: var(--space-contact-map);
+  background-color: var(--color-map); /* подложка #E5E3DF */
+}
+
+.ui-map__placeholder {
+  height: 100%;
+  margin: 0;
+}
+
+.ui-map__placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ui-map__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* --- >=1024px: наложение (карта 600 + бокс 460 поверх слева) --- */
+@media (min-width: 1024px) {
+  .contacts__inner {
+    display: grid;
+  }
+
+  /* Оба слоя в одной ячейке; оверлей выше карты, но клики сквозь него
+     (кроме самой карточки) уходят в карту: иначе правая половина карты
+     была бы некликабельна под прозрачным оверлеем. */
+  .contacts__map,
+  .contacts__overlay {
+    grid-area: 1 / 1;
+  }
+
+  .contacts__overlay {
+    position: relative;
+    z-index: var(--z-map-card); /* карточка выше iframe */
+    pointer-events: none;
+  }
+
+  /* Тёмный бокс: на всю ширину контейнера, без внешнего отступа и паддинга */
+  .contacts__card {
+    width: 100%;
+    max-width: none;
+    margin-top: 0;
+    padding: 0;
+    background-color: var(--color-bg-dark);
+    pointer-events: auto;
+  }
+}

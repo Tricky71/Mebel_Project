@@ -1,0 +1,268 @@
+/* ==========================================================================
+   variables.css — дизайн-токены проекта «Разная Мебель»
+   Основа: токены референса. Красный заменён по варианту A. Только :root.
+   ========================================================================== */
+
+:root {
+  /* --- Цвета --- */
+  --color-bg-dark: #232323; /* hero-фон (grey-14) */
+  --color-accent: #b4552d; /* заливки с текстом: бар шапки, круг-CTA, кнопки (белый текст 4,87:1, AA) */
+  --color-accent-decor: #b4552d; /* только декор без текста: знак логотипа, тире, номера 01/02/03 */
+  --color-accent-text-dark: #dc8d69; /* акцент как текст на #232323 (6,03:1) и #363636 (4,64:1) — AA */
+  --color-success: #1e6b3f; /* успех (на белом 6,45:1) */
+  --color-error: #b3261e; /* ошибка (на белом 6,48:1) */
+  --color-accent-hover: #9a4726; /* hover заливок (белый текст 6,30:1, AA) */
+  --color-text-light: #eaeaea; /* светлый текст на темном */
+  --color-surface: #fefefe; /* белый: текст меню, линии бургера */
+  --color-accent-contrast: #fefefe; /* текст на красном */
+  --color-overlay: rgb(0 0 0 / 70%); /* затемнение hero-фото */
+  --color-overlay-top: rgb(0 0 0 / 86%); /* верх hero: темнее, под шапку и H1 */
+  /* Hero: усиленный оверлей (фон должен быть заметно темнее, чем в других секциях) */
+  --color-hero-overlay-top: rgb(0 0 0 / 92%);
+  --color-hero-overlay-mid: rgb(0 0 0 / 80%);
+  --color-hero-overlay-bottom: rgb(0 0 0 / 62%);
+  --color-slash-dim: rgb(255 255 255 / 65%); /* приглушенный "/" активного пункта меню */
+
+  /* --- Шрифты --- */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; /* основной текст */
+  --font-heading: "Unbound", "Inter", system-ui, sans-serif; /* заголовки */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* --- Fluid-типографика: 390 base -> 768 -> 1200 (min-width) --- */
+  --font-hero: clamp(2.346rem, 1.173rem + 5.2785vw, 4.692rem); /* H1: 37.5 -> 75.1 (+20% от базовых 31.3/62.6) */
+  --font-subhero: clamp(1.5625rem, 1rem + 2.5vw, 2.75rem); /* подзаголовок: 25 -> 44 */
+  --font-lead: clamp(0.79rem, 0.575rem + 1.15vw, 1.29rem); /* лид: 13 -> 18 -> 20 (15% больше) */
+  --font-nav: 0.875rem; /* десктоп-навигация: 14 фикс */
+  --font-menu: clamp(1.25rem, 1rem + 2vw, 1.375rem); /* мобайл-меню: ~20-22, §5.1 */
+  --font-btn: 0.8125rem; /* кнопки hero 390/768: 13 */
+  --font-btn-desktop: 0.875rem; /* кнопки панели 1200+: 14 */
+  --font-contact: 1rem; /* телефон шапки: 16 */
+  --font-tg: 0.8125rem; /* Telegram-ссылка: 13 */
+  --lh-tight: 1.2; /* заголовки */
+  --lh-body: 1.55; /* текстовые блоки */
+  --lh-menu: 1.6; /* пункты мобайл-меню, §5.1 */
+  --ls-link: 1px; /* Telegram-ссылка */
+
+  /* --- Отступы (fluid) --- */
+  --space-header-bar: 80px; /* высота красного бара <1200 */
+  --space-section-inline: 35px; /* боковые поля hero-контента 390 */
+  --space-menu-gap: clamp(16px, 5vw, 28px); /* ритм пунктов меню, §5.1 */
+  --space-menu-top: clamp(32px, 10vw, 56px); /* отступ меню от бара, §5.1 */
+  --space-nav-gap: 27px; /* шаг десктоп-навигации */
+  --space-panel-gap: 10px; /* зазор кнопок панели 1200+ */
+  --space-slash: 8px; /* зазор "/" до текста активного пункта */
+  --facts-row-bottom: 15px; /* нижний отступ ряда фактов */
+
+  /* --- Контейнер --- */
+  --container-max: 1146px;
+  --container-padding-mobile: 20px;
+  --container-padding-desktop: 40px;
+
+  /* --- Кнопки --- */
+  --btn-min-mobile: 177px; /* 177x39, режимы <1200 */
+  --btn-height-mobile: 39px;
+  --btn-min-desktop: 238px; /* 238x50, панель 1200+ */
+  --btn-height-desktop: 50px;
+
+  /* --- Шапка / бургер --- */
+  --burger-width: 28px;
+  --burger-height: 20px;
+  --burger-line: 3px;
+  --burger-hit: 44px; /* a11y хит-зона */
+  --logo-bar-width: 242px; /* логотип в баре <1200 (собственный SVG 242x33) */
+  --logo-bar-height: 33px;
+  /* логотип-знак: квадратная иконка шкафа (images/logo-4-*.svg) */
+  --logo-size: 40px;
+  --font-logo-text: 1rem; /* текст «Разная Мебель» рядом со знаком */
+
+  /* --- Facts (секция 1): токены спеке референса ---
+     Замеры facts-1920/768/390.html. Контраст eyebrow #918E8E на #232323 = 4.84 (AA). */
+  --color-text-muted: #918e8e; /* eyebrow facts */
+  --color-line: #5c5c5c; /* разделители facts */
+  --font-weight-light: 400; /* в референсе weight 300 без файла: браузер рисует 400, повторяем явно */
+  --font-eyebrow: 0.875rem; /* [ факты о нас ]: 14 фикс (все брейкпоинты) */
+  --font-stat: clamp(3.75rem, 3rem + 3.5vw, 4.375rem); /* значения: 60 -> 70 */
+  --font-body: clamp(1rem, 0.95rem + 0.3vw, 1.125rem); /* тексты ui-stat: 16 -> 18 */
+  --space-section-mobile: clamp(64px, 16vw, 90px); /* вертикаль секции, base */
+  --space-section-desktop: clamp(90px, 8vw, 140px); /* вертикаль секции (резерв) */
+  --space-facts-eyebrow: clamp(32px, 4vw, 40px); /* eyebrow -> контент (экспорт: 40) */
+  --space-stat-gap: clamp(16px, 3vw, 32px); /* горизонтальный зазор внутри строки */
+  --facts-top: clamp(48px, 5vw, 67px); /* верх секции >=1024 (экспорт: 67) */
+  --facts-bottom: clamp(64px, 8vw, 110px); /* низ секции >=1024 (экспорт: 110) */
+  --facts-row: 213px; /* шаг разделителей facts-1920.html: 283/496/709/923 */
+  --facts-row-top: 56px; /* контент строк 2-4 ниже разделителя (экспорт: 56-60) */
+  --facts-row-bottom: 15px; /* контент выше разделителя */
+  --facts-row-gap: 48px; /* иконка -> текст (экспорт: 40-52, среднее 45) */
+  --facts-media-max: 500px; /* ширина фото-колонки на 1920 (экспорт 500x800) */
+  --facts-media-fluid: clamp(300px, 42vw, 550px); /* фото-колонка 1024->1920 */
+  --facts-indent: 26px; /* контент строк от края (экспорт 390/768: 46-20, 75-49) */
+  --facts-indent-wide: 30px; /* то же >=1024 */
+  --stat-label-max: 24ch; /* ширина текстовой колонки строки >=768 */
+
+  /* --- Portfolio (секция 2): токены спеке референса ---
+     Замеры portfolio-1920/1440/768/390.html. #918E8E на #D9D9D9 = 2.30 (провал AA),
+     поэтому eyebrow в светлой секции затемнен до #5C5C5C = 4.74 (AA). */
+  --color-bg-light: #d9d9d9; /* фон секции */
+  --color-text-dark: #0e0e0e; /* текст и подписи на светлом (контраст 13.68) */
+  --color-text-muted-dark: #5c5c5c; /* eyebrow на светлом (AA, см. выше) */
+  --font-h2: clamp(2.71rem, 1.105rem + 3.4vw, 3.72rem); /* H2: 43.4 -> 59.5 (−15%) */
+  --font-cta-circle: 0.9375rem; /* текст круга: 15px */
+  --font-caption: 0.875rem; /* подписи-категории: 14px */
+  --ls-caption: 3px; /* letter-spacing вертикальных подписей */
+  --cta-circle: 152px; /* диаметр круга (экспорт; radius — всегда 50%) */
+  --space-mosaic-gap: 70px; /* межрядный шаг мозаики (экспорт) */
+  --space-mosaic-gap-sm: clamp(20px, 6vw, 32px); /* шаг стопки <768 */
+  --space-portfolio-pad: 120px; /* верх/низ секции >=1200 (экспорт: 120) */
+
+  /* --- Trust (секция 3): токены спеке референса ---
+     #918E8E на #363636 = 3.72 (провал AA) -> eyebrow #A3A1A1 = 4.70.
+     Красные номера 2.83 — decorative (порядок несет ol), цвет сохранен. */
+  --color-bg-dark-2: #363636; /* фон секции */
+  --color-text-muted-trust: #a3a1a1; /* eyebrow на #363636 (AA, см. выше) */
+  --font-h3: clamp(1.5rem, 1.1rem + 1.5vw, 2.3125rem); /* H3: 24 -> 37 */
+  --font-trust-text: clamp(1rem, 0.95rem + 0.3vw, 1.0625rem); /* тексты: 16 -> 17 */
+  --font-trust-num: 1rem; /* номера 01/02/03: 16px/500 фикс */
+  --space-trust-gap: clamp(32px, 6vw, 80px); /* фото <-> тело (экспорт: 81) */
+  --space-trust-num: clamp(20px, 4vw, 50px); /* номер <-> заголовок (экспорт: 21/50) */
+  --space-trust-row: clamp(28px, 7vw, 44px); /* вертикаль ряда <1200 */
+
+  /* --- Communication (секция 4): токены спеке референса ---
+     Замеры comm-1920/768/390.html. Sub/lead немонотонны (26->24->44, 18->16->20):
+     base-значения ниже, @768/@1200 — поточечно в communication.css. */
+  --font-comm: clamp(2rem, 1rem + 4.5vw, 4rem); /* H1: 32 -> 64 (@768 фикс 2rem) */
+  --font-commsub: 1.625rem; /* sub base 390: 26 */
+  --font-commlead: 1.125rem; /* lead base 390: 18 */
+  --font-commsub-desktop: 2.75rem; /* sub 1200+: 44 */
+  --font-commlead-desktop: 1.25rem; /* lead 1200+: 20 */
+  --font-field: 1rem; /* поля: 16 */
+  --font-mask: 0.88125rem; /* маска телефона: 14.1 */
+  --font-note: 0.6875rem; /* дисклеймер: 11 */
+  --comm-panel: 300px; /* ширина красной панели/карточки */
+  --comm-field-gap: 20px; /* зазор полей и submit -> ghost... ghost 16 (см. css) */
+  --comm-offset: 153px; /* панель x540 (экспорт) при контейнере 1146: 540-387 */
+  --comm-gap: 89px; /* панель -> тексты >=1200 (экспорт: 929-840) */
+
+  /* --- Reviews (секция 6): токены спеке референса ---
+     Замеры reviews-1920/768/390.html. H2 немонотонен 42 -> 55 -> 65:
+     fluid-clamp через весь диапазон (55 при 768 = 55.7, допуск PP).
+     #918F8F разделителей — почти дубль #918E8E (Δ1), отдельный токен
+     по спеке §9; при верстке не смешивать с --color-text-muted. */
+  --color-line-reviews: #918f8f; /* разделители reviews */
+  --font-reviews-title: clamp(2.23rem, 1.48rem + 3.09vw, 3.45rem); /* H2: 35.7 -> 55.2 (−15%) */
+  --font-review-name: 1.3875rem; /* имя площадки: 22.2px/300 фикс */
+  --font-review-lead: 1.0625rem; /* лид: 17px, все ширины */
+  --space-reviews-gap: clamp(24px, 4vw, 60px); /* межкарточный (wrap 768) */
+
+  /* --- Offer (секция 7): токены спеке референса ---
+     H2 поточечно: 27 (base) -> 52 (@768) -> 65 (@1200); лид 15 -> 18 -> 21
+     с константным lh 1.6667 (25/30/35). Переключения — в offer.css.
+     Раскладка полей формы — отдельный брейкпоинт 1024 (требование задачи). */
+  --font-offer-title: 1.6875rem; /* H2 [ Спецпредложение ] base 390: 27/400 */
+  --font-offer-lead: 0.9375rem; /* лид base 390: 15/300 */
+  --font-offer-submit: 0.875rem; /* submit Отправить: 14/400, все ширины */
+  --offer-card-top: 443px; /* открытый верх фото над карточкой (base) */
+  --offer-photo-h: 876px; /* высота фотозоны (все ширины, экспорт) */
+
+  /* --- About (секция 8): токены спеке референса ---
+     Замеры about-1920/768/390.html + PNG. Двухсегментные clamp: -a работает
+     base->768 (капы точно в значениях 768), -b включается с 768 и доводит
+     до десктопа к 1024 (мины совпадают с капами -a — стык непрерывен).
+     H2: 36 -> 50 -> 65; верх: 169 -> 319 -> 364; низ: 78 -> 108 -> 121. */
+  --font-about-h2-a: clamp(2.25rem, 1.35rem + 3.7vw, 3.125rem); /* H2: 36 -> 50 */
+  --font-about-h2-b: clamp(3.125rem, 0.3125rem + 5.86vw, 4.0625rem); /* H2: 50 -> 65 */
+  --font-about-text: clamp(1rem, 0.936rem + 0.26vw, 1.0625rem); /* тексты: 16 -> 17 */
+  --font-about-link: 1.0625rem; /* ссылка: 17px/400 фикс */
+  --font-about-num: 0.625rem; /* бейджи 01/02/03: 10px/300 фикс */
+  --space-about-top-a: clamp(169px, 14.3px + 39.7vw, 319px); /* верх: 169 -> 319 */
+  --space-about-top-b: clamp(319px, 184px + 17.6vw, 364px); /* верх: 319 -> 364 */
+  --space-about-h2lead-a: clamp(38px, 7.05px + 7.94vw, 68px); /* H2 -> лид */
+  --space-about-h2lead-b: clamp(68px, -4px + 9.38vw, 92px); /* H2 -> лид */
+  --space-about-link: 84px; /* лид -> ссылка (все ширины) */
+  --space-about-list-a: clamp(79px, 68.7px + 2.65vw, 89px); /* ссылка -> ряды */
+  --space-about-bottom-a: clamp(78px, 47.05px + 7.94vw, 108px); /* низ: 78 -> 108 */
+  --space-about-bottom-b: clamp(108px, 69px + 5.08vw, 121px); /* низ: 108 -> 121 */
+  --space-about-icon-cell: clamp(122px, 62.2px + 15.34vw, 180px); /* ячейка иконки: 122 -> 180; иконки 103/98/85 прижаты влево, тела всегда с края ячейки (1080/254/157) */
+  --space-about-row-inset: clamp(15px, -0.28rem + 5vw, 34px); /* инсет ряда <1024 */
+
+  /* --- Measurer (секция 9): токены спеке референса ---
+     H2 поточечно: 43 (base) -> 57 (@768) -> 59 (@1200); лид 16 -> 18 -> 19.
+     Переключения — в measurer.css, здесь только base. Сетка как communication:
+     base 390 -> 768 -> 1200 (без 1024). */
+  --font-meas: 2.6875rem; /* H2 base 390: 43/700 */
+  --font-meas-lead: 1rem; /* лид base 390: 16/500 */
+  --font-meas-formlead: 1.0625rem; /* лид панели: 17/400, все ширины */
+  --measurer-panel: 300px; /* красная панель base/1200 */
+  --measurer-panel-wide: 616px; /* красная панель 768 */
+  --measurer-photo-h: 1320px; /* высота фотозоны base (= min-height секции) */
+
+  /* --- Contacts (секция 10): токены спеке референса ---
+     Замеры contacts-1920/390.html. Отдельного экспорта 768 нет — fluid-clamp
+     через весь диапазон, капы сходятся к ~1024 (единственный брейкпоинт):
+     H2 21.8 -> 25.5; тело 14 -> 18; карта 390 -> 600. */
+  --color-map: #e5e3df; /* подложка карты (orange-89; есть в structure.md §7) */
+  --font-contact-title: clamp(1.3625rem, 1.22rem + 0.58vw, 1.59375rem); /* H2: 21.8 -> 25.5 */
+  --lh-contact-title: 1.28; /* 28/32.76 — константа */
+  --font-contact-text: clamp(0.875rem, 0.72rem + 0.63vw, 1.125rem); /* тело: 14 -> 18 */
+  --lh-contact-text: clamp(20.3px, 15.62px + 1.2vw, 27.9px); /* 20.3 -> 27.9 */
+  --space-contact-gap: 29px; /* title -> body (28.61/28.89 — константа) */
+  --space-contact-pad-block: 45px; /* верх/низ base; >=1024: 60px поточечно */
+  --space-contact-pad-box: 60px; /* паддинги бокса >=1024 */
+  --space-contact-top: 120px; /* карточка от верха карты */
+  --space-contact-map: clamp(390px, 261px + 33.1vw, 600px); /* высота карты 390 -> 600 */
+  --z-map-card: 1; /* карточка выше iframe карты */
+
+  /* --- Footer (секция 11): токены спеке референса ---
+     Замеры footer-1920/390.html. Типографика константна (13/30 обе ширины,
+     без clamp); переключается только раскладка. Единственный брейкпоинт 1024. */
+  --font-footer: 0.8125rem; /* 13px, base и десктоп */
+  --lh-footer: 2.3077; /* 30/13 */
+  --space-footer-gap: 3px; /* зазор стопки base (70-37-30) */
+  --space-footer-pad-top: 37px; /* верх base */
+  --space-footer-pad-bottom: 42px; /* низ base (42.5 -> целые, см. спеку §9) */
+  --space-footer-pad-desktop: 36px; /* верх/низ >=1024 (36+30+36=102 -> min-height 103 добирает 1px) */
+
+  /* --- Scrollbar (референс figma/line.jpg): светлый трек + красный pill-тамб.
+     Цвета — существующие (трек white, тамб accent, hover accert-hover). */
+  --scrollbar-width: 20px; /* ширина полосы (тамб 12px + поля 4px с каждой стороны) */
+  --scrollbar-radius: 8px; /* pill (больше половины видимой ширины тамба) */
+
+  /* --- Радиусы / переходы / слои --- */
+  --radius-none: 0;
+  --radius-circle: 50%; /* CTA-круги (экспортный 3000px нормализован) */
+  --radius-callback-form: 8px; /* попап обратного звонка (form.jpg: лёгкое скругление) */
+  --transition-base: 250ms ease;
+  --z-header: 50;
+  --z-nav: 40;
+  --z-callback: 60; /* floating-виджет выше шапки/карты (structure.md §7) */
+  --z-tooltip: 70; /* тултип выше кнопки */
+
+  /* --- ui-callback (floating-виджет): кнопки / попап формы ---
+     Круги 60×60 все ширины; Telegram виден только >=1200px;
+     попап формы 360×350 (form.jpg). */
+  --color-telegram: #229ed9; /* голубой круг Telegram */
+  --color-tooltip: #292929; /* фон тултипа (structure.md §4) */
+  --color-callback-ink: #0e0e0e; /* текст попапа на белом (как --color-text-dark) */
+  --callback-size: 60px; /* диаметр кругов: звонок / Telegram / закрытие */
+  --callback-form-w: 360px; /* ширина попапа (form.jpg) */
+  --callback-form-h: 350px; /* высота попапа (form.jpg) */
+  --callback-offset: 20px; /* отступы виджета от краёв вьюпорта */
+  --callback-gap: 12px; /* зазор кнопок в стеке / попап -> X (buttons.jpg, whats.jpg) */
+  --callback-form-pad: 24px; /* внутренние поля попапа */
+  --shadow-callback: 0 0 10px rgb(0 0 0 / 30%); /* тень кругов (structure.md §7: фиксируем 10px-вариант) */
+  --font-callback-title: 1.25rem; /* заголовок попапа: 20 */
+  --font-callback-text: 0.9375rem; /* текст/кнопка попапа: 15 */
+  --font-callback-phone: 1rem; /* телефон в попапе: 16 */
+
+  /* --- Новые токены проекта (не из референса) --- */
+  --color-bg-card-light: #fefefe; /* светлая карточка блока замера */
+  --measurer-card-w: 560px; /* ширина карточки замера */
+  --works-gap: clamp(12px, 2vw, 24px); /* зазор превью «Наши работы» */
+  --works-ratio: 4 / 3; /* пропорция превью */
+  --lightbox-bg: rgb(0 0 0 / 92%); /* подложка лайтбокса */
+  --font-tab: 0.9375rem; /* вкладки блока замера: 15 */
+  --font-step-title: clamp(1.125rem, 1rem + 0.6vw, 1.5rem); /* заголовки шагов: 18 -> 24 */
+  --font-review: clamp(1rem, 0.95rem + 0.3vw, 1.125rem); /* текст отзыва: 16 -> 18 */
+  --font-works-title: var(--font-h2); /* H2 «Наши работы» как у Services */
+}

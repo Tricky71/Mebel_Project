@@ -1,0 +1,159 @@
+/* ==========================================================================
+   hero.css — первый экран.
+   Основа — hero.css референса; убраны красная панель, split-фон и «подарок»
+   (требования R-30…R-33). Mobile-First: base 390 -> 768 -> 1200.
+   Высота контентная, фон full-bleed, контент в контейнере.
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  overflow: hidden; /* кроп фото, без горизонтального скролла */
+  /* max-width: 1920px; */
+  margin: 0 auto;
+  background-color: var(--color-bg-dark);
+  height: 100vh;
+  max-height: 1080px;
+}
+
+/* Фоновое фото: декор, перекрыто оверлеем */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left;
+  display: block;
+}
+
+.hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left;
+}
+
+.hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Усиленное затемнение: темнее сверху (шапка и H1), к низу мягче,
+     но без полной прозрачности — фото остаётся приглушённым по всей высоте */
+  background: linear-gradient(
+    to bottom,
+    var(--color-hero-overlay-top) 0%,
+    var(--color-hero-overlay-mid) 45%,
+    var(--color-hero-overlay-bottom) 100%
+  );
+}
+
+.hero__inner {
+  position: relative;
+  padding-top: calc(var(--space-header-bar) + 58px);
+  padding-bottom: 56px;
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  max-width: 628px;
+}
+
+.hero__title {
+  font-size: var(--font-hero);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+  color: var(--color-text-light);
+  text-transform: uppercase; /* капс через CSS */
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.hero__subtitle {
+  margin-top: 12px;
+  font-size: var(--font-subhero);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+  text-transform: uppercase;
+}
+
+.hero__lead {
+  margin-top: 28px;
+  max-width: 39ch;
+  font-size: var(--font-lead);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--lh-body);
+  color: var(--color-text-light);
+}
+
+.hero__lead:empty {
+  display: none; /* пустой лид не оставляет дыру */
+}
+
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;   /* кнопки одной ширины (растянуты на контейнер) */
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.hero__tg {
+  margin-top: 20px;
+  font-size: var(--font-tg);
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
+  letter-spacing: var(--ls-link);
+  color: var(--color-surface);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Telegram в hero нужен только там, где шапка не показывает контакты (<1200) */
+@media (min-width: 768px) {
+  .hero__inner {
+    padding-top: calc(var(--space-header-bar) + 60px);
+    padding-bottom: 64px;
+  }
+
+  .hero__lead {
+    margin-top: 37px;
+  }
+
+  .hero__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero__inner {
+    display: flex;
+    align-items: center;
+    min-height: min(100svh, 900px);
+    padding-top: calc(var(--space-header-bar) + 40px);
+    padding-bottom: 60px;
+  }
+
+  .hero__subtitle {
+    margin-top: 3px;
+  }
+
+  .hero__lead {
+    margin-top: 48px;
+  }
+
+  .hero__actions {
+    margin-top: 40px;
+  }
+
+  /* Контакты уже в шапке */
+  .hero__tg {
+    display: none;
+  }
+}

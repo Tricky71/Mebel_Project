@@ -1,0 +1,114 @@
+/* ==========================================================================
+   process.css — «Как мы работаем»: 5 нумерованных шагов (R-70…R-72).
+   Новая секция (в референсе её нет); токены и приёмы из trust/about референса.
+   Mobile-First: base 390 -> 768 -> 1200. Слов про цех и оборудование нет.
+   ========================================================================== */
+
+.process {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+}
+
+.process__inner {
+  padding-top: var(--space-section-mobile);
+  padding-bottom: var(--space-section-mobile);
+}
+
+.process__eyebrow {
+  color: var(--color-text-muted-dark);
+}
+
+.process__title {
+  min-width: 0;
+  margin-top: 16px;
+  overflow-wrap: break-word;
+  font-size: var(--font-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.process__list {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-top: 48px;
+  list-style: none;
+  counter-reset: none;
+}
+
+.ui-step {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: 16px;
+  min-width: 0;
+  padding: 24px 0;
+  border-top: 1px solid var(--color-text-dark);
+}
+
+.ui-step:last-child {
+  border-bottom: 1px solid var(--color-text-dark);
+}
+
+/* Номер декоративный: порядок задаёт ol (aria-hidden в разметке) */
+.ui-step__badge {
+  font-size: 2rem;
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+}
+
+.ui-step__title {
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: var(--font-step-title);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+  text-transform: uppercase;
+}
+
+.ui-step__text {
+  grid-column: 2;
+  min-width: 0;
+  margin-top: 12px;
+  overflow-wrap: break-word;
+  font-size: var(--font-body);
+  font-weight: var(--font-weight-light);
+  line-height: var(--lh-body);
+}
+
+.ui-step__text:empty {
+  display: none;
+}
+
+.process__cta {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 40px;
+}
+
+@media (min-width: 768px) {
+  .ui-step {
+    grid-template-columns: 96px minmax(0, 1fr) minmax(0, 1.2fr);
+    column-gap: 24px;
+    padding: 32px 0;
+  }
+
+  .ui-step__text {
+    grid-column: 3;
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .process__list {
+    margin-top: 72px;
+  }
+
+  .ui-step {
+    grid-template-columns: 140px minmax(0, 1fr) minmax(0, 1.2fr);
+    column-gap: 40px;
+    padding: 40px 0;
+  }
+}

@@ -1,0 +1,26 @@
+# .htaccess — «Разная Мебель»
+# CSP, кеширование, запрет доступа к конфигу
+
+<IfModule mod_headers.c>
+  # Запрет прямого доступа к config.php
+  <Files "config.php">
+    Order allow,deny
+    Deny from all
+  </Files>
+
+  # Content Security Policy
+  Header set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+
+  Header always set X-Content-Type-Options nosniff
+  Header always set Referrer-Policy "no-referrer"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>

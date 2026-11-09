@@ -1,0 +1,62 @@
+/* ==========================================================================
+   privacy.css — страница «Политика конфиденциальности» (privacy.html)
+   Раньше оформление было inline-стилем в разметке — нарушение R-02 (CSP).
+   Теперь отдельный файл: только токены из variables.css, mobile-first.
+   ========================================================================== */
+
+.privacy {
+  background-color: var(--color-bg-dark); /* как у остальных тёмных секций */
+  color: var(--color-text-light);
+  padding-block: var(--space-section-mobile);
+}
+
+.privacy__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-facts-eyebrow); /* eyebrow -> заголовок */
+  min-width: 0;
+}
+
+.privacy__eyebrow {
+  color: var(--color-text-muted);
+}
+
+.privacy__title {
+  max-width: 24ch;
+  font-size: var(--font-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+  color: var(--color-surface);
+  text-wrap: balance;
+}
+
+.privacy__note {
+  max-width: 60ch;
+  padding: 16px 20px;
+  border-left: 3px solid var(--color-accent);
+  font-size: var(--font-body);
+  line-height: var(--lh-body);
+  color: var(--color-accent-text-dark);
+}
+
+.privacy__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-stat-gap);
+  max-width: 72ch; /* читаемая длина строки */
+  font-size: var(--font-body);
+  line-height: var(--lh-body);
+  color: var(--color-text-light);
+}
+
+.privacy__content p {
+  min-width: 0;
+  overflow-wrap: anywhere; /* defensive: длинные e-mail/URL (R-09) */
+}
+
+/* --- >=1024: большой вертикальный ритм, как у остальных секций --- */
+@media (min-width: 1024px) {
+  .privacy {
+    padding-block: var(--space-section-desktop);
+  }
+}

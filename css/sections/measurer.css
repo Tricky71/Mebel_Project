@@ -1,0 +1,144 @@
+/* ==========================================================================
+   measurer.css — «Бесплатный выезд инженера» (заявка на замер).
+   Схема взята из блока .offer референса (tricky71.github.io/Mebel_br):
+   фото-фон с градиентным оверлеем → тёмная карточка с H2, лидом и формой.
+   Отличия от offer: свой фон (kitchen-bg.jpg), свои тексты, без note
+   и без вылетов карточки за рамку секции.
+   Mobile-First: base 390 -> 768 -> 1024 (поля в ряд) -> 1200.
+   ========================================================================== */
+
+.measurer {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-bg-dark); /* подложка под фото */
+  color: var(--color-text-light);
+}
+
+/* --- Фон: фото + затемнение (техника hero/offer) --- */
+.measurer__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.measurer__bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.measurer__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--color-overlay-top),
+    var(--color-overlay) 45%,
+    transparent 80%
+  );
+}
+
+.measurer__inner {
+  position: relative;
+  padding-top: clamp(120px, 40vw, 320px); /* открытый верх фото над карточкой */
+  padding-bottom: var(--space-section-mobile);
+}
+
+/* --- Тёмная карточка поверх фото --- */
+.measurer__card {
+  min-width: 0;
+  padding: clamp(32px, 6vw, 72px) clamp(20px, 5vw, 64px);
+  background-color: var(--color-bg-dark);
+}
+
+/* Типографика секции: H2 27 -> 52 -> 65, лид 15 -> 18 -> 21
+   (переключения — здесь, в :root они только базовые) */
+@media (min-width: 768px) {
+  .measurer {
+    --font-offer-title: 2.7625rem; /* H2: 44.2 (−15% от 52) */
+    --font-offer-lead: 1.125rem;   /* лид: 18 */
+  }
+}
+
+@media (min-width: 1200px) {
+  .measurer {
+    --font-offer-title: 1.7531rem; /* H2: 28.05 (−15% от 33) */
+    --font-offer-lead: 1.3125rem;  /* лид: 21 */
+  }
+}
+
+.measurer__title {
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: var(--font-offer-title); /* 27 -> 52 -> 65 */
+  font-weight: var(--font-weight-regular);
+  line-height: var(--lh-tight);
+  color: var(--color-text-light);
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.measurer__lead {
+  min-width: 0;
+  max-width: 44ch;
+  margin: 28px auto 0;
+  overflow-wrap: break-word;
+  font-size: var(--font-offer-lead); /* 15 -> 18 -> 21 */
+  font-weight: var(--font-weight-light);
+  line-height: 1.6667;
+  color: var(--color-text-light);
+  text-align: center;
+  text-wrap: pretty;
+}
+
+.measurer__lead:empty {
+  display: none;
+}
+
+/* --- Форма: позиционные переопределения инстанса ui-lead-form --- */
+.measurer .ui-lead-form {
+  width: min(100%, 560px);
+  margin: 32px auto 0;
+}
+
+/* --- >=1024: поля и кнопка в одну строку (как offer) --- */
+@media (min-width: 1024px) {
+  .measurer .ui-lead-form {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 20px;
+    width: min(100%, 890px);
+    margin-top: 48px;
+  }
+
+  .measurer .ui-lead-form__field {
+    flex: 1 1 0;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+
+  .measurer .ui-lead-form__error {
+    display: none; /* в ряд не влезают: выводятся через status */
+  }
+
+  .measurer .ui-lead-form__submit {
+    flex: none;
+    width: 230px;
+  }
+
+  .measurer .ui-lead-form__status {
+    flex-basis: 100%;
+  }
+}
+
+/* --- >=1200: карточка в боксе 1160 по центру --- */
+@media (min-width: 1200px) {
+  .measurer__card {
+    width: 1160px;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+}

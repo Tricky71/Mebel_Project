@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Мебель на заказ в Самаре — производство и монтаж | Мебель-Проект</title>
+  <meta name="description" content="Корпусная мебель на заказ в Самаре: кухни, шкафы, гардеробные, детские и мебель для офиса. Бесплатный выезд замерщика, индивидуальный проект, монтаж под ключ.">
+  <meta name="theme-color" content="#b4552d">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+  <!-- Open Graph. og:url намеренно отсутствует (допущение A2 в requirements.md):
+       добавить после получения домена. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Мебель-Проект">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Мебель на заказ в Самаре — дизайн, производство и монтаж">
+  <meta property="og:description" content="Корпусная мебель на заказ: кухни, шкафы, гардеробные, детские и мебель для офиса. Бесплатный выезд замерщика и монтаж под ключ.">
+  <meta property="og:image" content="images/kitchen-bg.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <!-- Критический шрифт: Inter 400 (текст первого экрана).
+       preload снимает лишний round-trip: браузер находит шрифт до разбора CSS. -->
+  <link rel="preload" href="fonts/inter-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Unbounded-Medium.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/ui.css">
+  <link rel="stylesheet" href="css/sections/header.css">
+  <link rel="stylesheet" href="css/sections/hero.css">
+  <link rel="stylesheet" href="css/sections/facts.css">
+  <link rel="stylesheet" href="css/sections/services.css">
+  <link rel="stylesheet" href="css/sections/process.css">
+  <link rel="stylesheet" href="css/sections/works.css">
+  <link rel="stylesheet" href="css/sections/reviews.css">
+  <link rel="stylesheet" href="css/sections/faq.css">
+  <link rel="stylesheet" href="css/sections/measurer.css">
+  <link rel="stylesheet" href="css/sections/contacts.css">
+  <link rel="stylesheet" href="css/sections/footer.css">
+  <link rel="stylesheet" href="css/sections/widget.css">
+  <!-- Структурированные данные: локальный бизнес.
+       Контакты — черновые (data-draft="true" в разметке), поэтому при замене
+       телефона/почты их нужно обновить и здесь. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Мебель-Проект",
+    "description": "Корпусная мебель на заказ: кухни, шкафы, гардеробные, детские и мебель для офиса.",
+    "telephone": "+7 (987) 123-44-67",
+    "email": "info@raznamebel.ru",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Самара",
+      "addressCountry": "RU"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Самара"
+    },
+    "image": "images/kitchen-bg.jpg",
+    "priceRange": "$$"
+  }
+  </script>
+</head>
+<body>
+  <!-- Спрайт SVG-иконок: обязан лежать в <body>. Внутри <head> по HTML5
+       разрешены только метаданные, поэтому <svg> здесь давал ошибку разбора
+       (unexpected-end-tag: head). display:none — из .ui-icon-sprite. -->
+  <svg class="ui-icon-sprite" aria-hidden="true" focusable="false" width="0" height="0">
+      <symbol id="icon-arrow-2" viewBox="0 0 32 32">
+        <path d="M27.31 6.31l-6.18 6.18-6.19-6.18 1.19-1.19L3.05 23.59l6.53 6.52L27.31 6.31z"/>
+      </symbol>
+      <symbol id="icon-leaf" viewBox="0 0 24 24">
+        <path d="M12 2c-2.76 0-5 2.24-5 5s2.24 5 5 5h2c2.76 0 5-2.24 5-5s-2.24-5-5-5zm0 8c-1.66 0-3 1.34-3 3s1.34 3 3 3h2c1.66 0 3-1.34 3-3s-1.34-3-3-3zm0 8c-2.33 0-4.33-1.5-4.33-3.5s1.5-4.33 3.83-5.5C13 5.34 11.66 4 10 4c-1.66 0-3 1.34-3 3s1.34 3 3 3z"/>
+      </symbol>
+      <symbol id="icon-star" viewBox="0 0 24 24">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L8.95 13.03l-4.21 2.15L12 2l-3.09 6.26L2 9.27l5-4.87L5.05 13.03l4.21 2.15L12 2z"/>
+      </symbol>
+      <symbol id="icon-tools" viewBox="0 0 24 24">
+        <path d="M15 13h2.5l-1.5-3H9l-1.5 3H6.5c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5v2H15v2zM7 17h2v-5H7v5zm4 0h2v-5h-2v5z"/>
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 32 32">
+        <path d="M19.375 5.063l-9.5 13.625-6.563-4.875-3.313 4.594 11.188 8.531 12.813-18.375z"/>
+      </symbol>
+    </svg>
+  <a class="ui-skip" href="#main">Перейти к содержимому</a>
+  <header class="site-header">
+    <div class="site-header__inner ui-container">
+      <a href="/" class="site-header__logo" aria-label="Мебель-Проект — главная">
+        <img class="site-header__logo-img site-header__logo-img--bar" src="images/logo-4-light.svg" alt="" width="40" height="40">
+        <img class="site-header__logo-img site-header__logo-img--dark" src="images/logo-4-accent.svg" alt="" width="40" height="40">
+        <span class="site-header__logo-text" aria-hidden="true">Мебель-<span class="site-header__logo-text-accent">Проект</span></span>
+      </a>
+      <nav class="site-nav" id="site-nav" hidden>
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="#facts">О нас</a></li>
+          <li><a class="site-nav__link" href="#services">Услуги</a></li>
+          <li><a class="site-nav__link" href="#works">Портфолио</a></li>
+          <li><a class="site-nav__link" href="#reviews">Отзывы</a></li>
+          <li><a class="site-nav__link" href="#contacts">Контакты</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="site-header__burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="site-nav">
+        <span class="site-header__burger-line" aria-hidden="true"></span>
+      </button>
+      <div class="site-header__contacts">
+        <a href="tel:+79991234567" class="site-header__phone">+7 (987) 123-44-67</a>
+        <a href="https://t.me/+79991234567" class="site-header__tg" target="_blank" rel="noopener">Написать в Telegram</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero__bg">
+        <!-- preload="metadata": браузер не тянет сразу весь файл (11 МБ).
+             Постер — статичный кадр первого экрана, показывается мгновенно и
+             держит LCP, пока видео подгружается. -->
+        <video src="images/video/4.mp4" poster="images/kitchen-bg.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+      </div>
+      <div class="hero__inner ui-container">
+        <div class="hero__content">
+          <h1 class="hero__title">Мебель на заказ</h1>
+          <p class="hero__subtitle">под ваши задачи</p>
+          <p class="hero__lead">Дизайн, производство и монтаж корпусной мебели в Самаре</p>
+          <div class="hero__actions">
+            <a href="#measurer" class="ui-btn ui-btn--primary" data-lead-source="hero">Рассчитать стоимость</a>
+            <a href="#measurer" class="ui-btn ui-btn--outline">Вызвать замерщика</a>
+          </div>
+          <a href="https://t.me/+79991234567" class="hero__tg" target="_blank" rel="noopener">Написать в Telegram</a>
+        </div>
+      </div>
+    </section>
+    <section id="facts" class="facts">
+      <div class="facts__inner ui-container">
+        <div class="facts__eyebrow ui-eyebrow">[ факты о нас ]</div>
+        <ul class="facts__list">
+          <li class="facts__item">
+            <div class="ui-stat">
+              <div class="ui-stat__icon">
+                <svg viewBox="0 0 32 32"><use href="#icon-check" /></svg>
+              </div>
+              <div class="ui-stat__value">1200</div>
+              <div class="ui-stat__text">кв. м выполнено за 5 лет</div>
+            </div>
+          </li>
+          <li class="facts__item">
+            <div class="ui-stat">
+              <div class="ui-stat__icon">
+                <svg viewBox="0 0 32 32"><use href="#icon-check" /></svg>
+              </div>
+              <div class="ui-stat__value">500+</div>
+              <div class="ui-stat__text">довольных клиентов</div>
+            </div>
+          </li>
+          <li class="facts__item">
+            <div class="ui-stat">
+              <div class="ui-stat__icon">
+                <svg viewBox="0 0 32 32"><use href="#icon-check" /></svg>
+              </div>
+              <div class="ui-stat__value">15</div>
+              <div class="ui-stat__text">лет на рынке</div>
+            </div>
+          </li>
+          <li class="facts__item">
+            <div class="ui-stat">
+              <div class="ui-stat__icon">
+                <svg viewBox="0 0 32 32"><use href="#icon-check" /></svg>
+              </div>
+              <div class="ui-stat__value">100%</div>
+              <div class="ui-stat__text">гарантия качества</div>
+            </div>
+          </li>
+        </ul>
+        <div class="facts__media">
+          <div class="facts__media-inner"></div>
+        </div>
+      </div>
+    </section>
+    <section id="services" class="services">
+      <div class="services__inner ui-container">
+        <div class="services__eyebrow ui-eyebrow">[ услуги ]</div>
+
+        <div class="services__mosaic" role="list" aria-label="Виды мебели на заказ">
+          <div class="services__row services__row--r1">
+            <h2 class="services__title">что мы делаем<span class="services__title-mark">?</span></h2>
+            <p class="services__lead">Индивидуальные решения для жилых и офисных помещений, разработанные с учетом особенностей пространства.</p>
+            <figure class="services-card services-card--p1" role="listitem">
+              <img src="images/case.jpg" alt="шкафы" loading="lazy" decoding="async" width="600" height="520">
+              <figcaption class="services-card__caption">шкафы</figcaption>
+            </figure>
+          </div>
+
+          <div class="services__row services__row--r2">
+            <figure class="services-card services-card--p2" role="listitem">
+              <img src="images/box.jpg" alt="комоды" loading="lazy" decoding="async" width="300" height="400">
+              <figcaption class="services-card__caption">комоды</figcaption>
+            </figure>
+            <figure class="services-card services-card--p3" role="listitem">
+              <img src="images/bath.jpg" alt="ванная" loading="lazy" decoding="async" width="760" height="400">
+              <figcaption class="services-card__caption">мебель для ванной</figcaption>
+            </figure>
+          </div>
+
+          <div class="services__row services__row--r3">
+            <figure class="services-card services-card--p4" role="listitem">
+              <img src="images/kitchen.jpg" alt="КУХНИ" loading="lazy" decoding="async" width="860" height="520">
+              <figcaption class="services-card__caption">кухни</figcaption>
+            </figure>
+            <div class="services__side">
+              <div class="services__cta">
+                <a href="#measurer" class="ui-cta-circle" data-cta="services">
+                  <span class="ui-cta-circle__text">Рассчитать стоимость</span>
+                </a>
+              </div>
+              <p class="services__note">Каждый проект — уникален, как и каждая комната, где будет стоять наша мебель.</p>
+            </div>
+          </div>
+
+          <div class="services__row services__row--r4">
+            <figure class="services-card services-card--p5" role="listitem">
+              <img src="images/kids.jpg" alt="детские" loading="lazy" decoding="async" width="760" height="400">
+              <figcaption class="services-card__caption">мебель для детских</figcaption>
+            </figure>
+            <figure class="services-card services-card--p6" role="listitem">
+              <img src="images/office.jpg" alt="офис" loading="lazy" decoding="async" width="300" height="400">
+              <figcaption class="services-card__caption">мебель для офиса</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="works" class="works">
+      <div class="works__inner ui-container">
+        <div class="works__eyebrow ui-eyebrow">[ портфолио ]</div>
+        <h2 class="works__title">Наши работы</h2>
+        <p class="works__lead">Ознакомьтесь с нашими последними проектами.</p>
+        <ul class="works__list" data-works-list>
+          <!-- Ряд 1: вертикаль + горизонталь(2) + вертикаль -->
+          <li class="works__item works__item--tall" data-works-item>
+            <a href="images/case.jpg" class="works-thumb" data-gallery-item
+               data-gallery-src="images/case.jpg" data-caption="Шкаф-купе">
+              <img src="images/case.jpg" alt="Шкаф-купе" width="1440" height="1920" loading="lazy" decoding="async">
+            </a>
+          </li>
+          <li class="works__item works__item--wide" data-works-item>
+            <a href="images/kitchen-bg-2.jpg" class="works-thumb" data-gallery-item
+               data-gallery-src="images/kitchen-bg-2.jpg" data-caption="Кухня на заказ">
+              <img src="images/kitchen-bg-2.jpg" alt="Кухня на заказ" width="1920" height="1280" loading="lazy" decoding="async">
+            </a>
+          </li>
+          <li class="works__item works__item--tall" data-works-item>
+            <a href="images/office.jpg" class="works-thumb" data-gallery-item
+               data-gallery-src="images/office.jpg" data-caption="Шкаф-купе в кабинет">
+              <img src="images/office.jpg" alt="Шкаф-купе в кабинет" width="1280" height="1920" loading="lazy" decoding="async">
+            </a>
+          </li>
+          <!-- Ряд 2: горизонталь(2) + горизонталь(2) — полный ряд -->
+          <li class="works__item works__item--wide" data-works-item>
+            <a href="images/kids.jpg" class="works-thumb" data-gallery-item
+               data-gallery-src="images/kids.jpg" data-caption="Детская мебель">
+              <img src="images/kids.jpg" alt="Детская мебель" width="1920" height="1280" loading="lazy" decoding="async">
+            </a>
+          </li>
+          <li class="works__item works__item--wide" data-works-item>
+            <a href="images/kitchen-bg-2.jpg" class="works-thumb" data-gallery-item
+               data-gallery-src="images/kitchen-bg-2.jpg" data-caption="Кухня в новостройке">
+              <img src="images/kitchen-bg-2.jpg" alt="Кухня в новостройке" width="1920" height="1280" loading="lazy" decoding="async">
+            </a>
+          </li>
+          <!-- Ряд 3: вертикаль + вертикаль + квадрат + вертикаль -->
+          <li class="works__item works__item--tall" data-works-item>
+            <a href="images/kitchen.jpg" class="works-thumb" data-gallery-item
+               data-gallery-src="images/kitchen.jpg" data-caption="Кухонный гарнитур">
+              <img src="images/kitchen.jpg" alt="Кухонный гарнитур" width="1536" height="1920" loading="lazy" decoding="async">
+            </a>
+          </li>
+          <li class="works__item works__item--tall" data-works-item>
+            <a href="images/about.jpg" class="works-thumb" data-gallery-item
+               data-gallery-src="images/about.jpg" data-caption="Гардеробная">
+              <img src="images/about.jpg" alt="Гардеробная" width="2000" height="3000" loading="lazy" decoding="async">
+            </a>
+          </li>
+          <li class="works__item works__item--square" data-works-item>
+            <a href="images/bath.jpg" class="works-thumb" data-gallery-item
+               data-gallery-src="images/bath.jpg" data-caption="Мебель в ванную">
+              <img src="images/bath.jpg" alt="Мебель в ванную" width="1859" height="1920" loading="lazy" decoding="async">
+            </a>
+          </li>
+          <li class="works__item works__item--tall" data-works-item>
+            <a href="images/box.jpg" class="works-thumb" data-gallery-item
+               data-gallery-src="images/box.jpg" data-caption="Комод">
+              <img src="images/box.jpg" alt="Комод" width="1280" height="1920" loading="lazy" decoding="async">
+            </a>
+          </li>
+          <!-- Ряд 4: горизонталь(2) + горизонталь(2) -->
+          <li class="works__item works__item--wide" data-works-item>
+            <a href="images/office.jpg" class="works-thumb" data-gallery-item
+               data-gallery-src="images/office.jpg" data-caption="Мебель для офиса">
+              <img src="images/office.jpg" alt="Мебель для офиса" width="1280" height="1920" loading="lazy" decoding="async">
+            </a>
+          </li>
+          <li class="works__item works__item--wide" data-works-item>
+            <a href="images/case.jpg" class="works-thumb" data-gallery-item
+               data-gallery-src="images/case.jpg" data-caption="Шкаф-купе в прихожую">
+              <img src="images/case.jpg" alt="Шкаф-купе в прихожую" width="1440" height="1920" loading="lazy" decoding="async">
+            </a>
+          </li>
+        </ul>
+        <div class="works__more">
+          <button type="button" class="works__more-btn" data-works-more>
+            Показать ещё
+          </button>
+        </div>
+      </div>
+    </section>
+    <section id="process" class="process">
+      <div class="process__inner ui-container">
+        <div class="process__eyebrow ui-eyebrow">[ как мы работаем ]</div>
+        <h2 class="process__title ui-eyebrow">по этапам</h2>
+        <ol class="process__list">
+          <li class="process__item ui-step">
+            <div class="ui-step__badge">01</div>
+            <h3 class="ui-step__title">Консультация</h3>
+            <p class="ui-step__text">Обсуждаем ваши идеи и измеряем помещение.</p>
+          </li>
+          <li class="process__item ui-step">
+            <div class="ui-step__badge">02</div>
+            <h3 class="ui-step__title">Проект</h3>
+            <p class="ui-step__text">Разрабатываем 3D-визуализацию и чертежи.</p>
+          </li>
+          <li class="process__item ui-step">
+            <div class="ui-step__badge">03</div>
+            <h3 class="ui-step__title">Производство</h3>
+            <p class="ui-step__text">Изготавливаем мебель по точным размерам.</p>
+          </li>
+          <li class="process__item ui-step">
+            <div class="ui-step__badge">04</div>
+            <h3 class="ui-step__title">Монтаж</h3>
+            <p class="ui-step__text">Устанавливаем и приступаем к пользованию.</p>
+          </li>
+        </ol>
+        <div class="process__cta">
+          <a href="#measurer" class="ui-btn ui-btn--primary">Заказать замер</a>
+        </div>
+      </div>
+    </section>
+    <dialog class="ui-lightbox">
+      <div class="ui-lightbox__inner">
+        <figure class="ui-lightbox__figure">
+          <img class="ui-lightbox__img" src="" alt="" width="1200" height="800">
+          <figcaption class="ui-lightbox__caption"></figcaption>
+          <div class="ui-lightbox__counter"></div>
+        </figure>
+        <p class="ui-lightbox__error" hidden>Не удалось загрузить изображение</p>
+      </div>
+      <button type="button" class="ui-lightbox__btn ui-lightbox__btn--close" data-close aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <button type="button" class="ui-lightbox__btn ui-lightbox__btn--prev" data-prev aria-label="Предыдущее фото">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <button type="button" class="ui-lightbox__btn ui-lightbox__btn--next" data-next aria-label="Следующее фото">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M9 6l6 6-6 6"/>
+        </svg>
+      </button>
+    </dialog>
+    <section id="reviews" class="reviews">
+      <div class="reviews__bg" aria-hidden="true">
+        <img src="images/faq-bg.jpg" alt="" width="1920" height="1280" loading="lazy" decoding="async">
+      </div>
+      <div class="reviews__inner ui-container">
+        <div class="reviews__eyebrow ui-eyebrow">[ отзывы ]</div>
+        <h2 class="reviews__title">что о нас говорят</h2>
+        <div class="reviews__slider"><ul class="reviews__list" role="list">
+          <li class="reviews__item" data-draft="true">
+            <div class="ui-review">
+              <div class="ui-review__text">
+                <p>Фирма отлично поработала — мебель теперь смотрится как новая, без единого шва.</p>
+              </div>
+              <div class="ui-review__author">— Иван Петров</div>
+              <div class="ui-review__meta">2026 · Ростов-на-Дону</div>
+            </div>
+          </li>
+          <li class="reviews__item" data-draft="true">
+            <div class="ui-review">
+              <div class="ui-review__text">
+                <p>Подготовят проект и наметят его по месту; без скрытых доплат — всё честно и понятно.</p>
+              </div>
+              <div class="ui-review__author">— Мария Козлова</div>
+              <div class="ui-review__meta">2026 · Москва</div>
+            </div>
+          </li>
+          <li class="reviews__item" data-draft="true">
+            <div class="ui-review">
+              <div class="ui-review__text">
+                <p>Монтажчики приехали вовремя, собрали за один день, убрали мусор. Ребёнок доволен новой кроватью!</p>
+              </div>
+              <div class="ui-review__author">— Олег Сидоров</div>
+              <div class="ui-review__meta">2026 · Санкт-Петербург</div>
+            </div>
+          </li>
+          <li class="reviews__item" data-draft="true">
+            <div class="ui-review">
+              <div class="ui-review__text">
+                <p>Заказали кухню под размер — всё идеально, ни одной пустоты, ни одного зазора.</p>
+              </div>
+              <div class="ui-review__author">— Елена Воронова</div>
+              <div class="ui-review__meta">2026 · Казань</div>
+            </div>
+          </li>
+          <li class="reviews__item" data-draft="true">
+            <div class="ui-review">
+              <div class="ui-review__text">
+                <p>Отличный сервис — менеджеры Always на связи, помогают выбрать материал и цвет.</p>
+              </div>
+              <div class="ui-review__author">— Дмитрий Волков</div>
+              <div class="ui-review__meta">2026 · Новосибирск</div>
+            </div>
+          </li>
+          <li class="reviews__item" data-draft="true">
+            <div class="ui-review">
+              <div class="ui-review__text">
+                <p>Мне очень понравилась atención al detalle — мебель сделано с душой, соответствует фото в каталоге.</p>
+              </div>
+              <div class="ui-review__author">— Анна Сидорова</div>
+              <div class="ui-review__meta">2026 · Екатеринбург</div>
+            </div>
+          </li>
+          <li class="reviews__item" data-draft="true">
+            <div class="ui-review">
+              <div class="ui-review__text">
+                <p>Сделали встроенный гардероб — идеально вписался в нишу, никаких зазоров, качество топ.</p>
+              </div>
+              <div class="ui-review__author">— Сергей Козлов</div>
+              <div class="ui-review__meta">2025 · Самара</div>
+            </div>
+          </li>
+          <li class="reviews__item" data-draft="true">
+            <div class="ui-review">
+              <div class="ui-review__text">
+                <p>Дизайнер помог перепланировать гостиную — теперь и зона отдыха, и рабочее место комфортные.</p>
+              </div>
+              <div class="ui-review__author">— Ольга Морозова</div>
+              <div class="ui-review__meta">2025 · Тольятти</div>
+            </div>
+          </li>
+          <li class="reviews__item" data-draft="true">
+            <div class="ui-review">
+              <div class="ui-review__text">
+                <p>Гарантия 15 лет — решили рискнуть, не пожалели. Через год всё как новое, петли не стучат.</p>
+              </div>
+              <div class="ui-review__author">— Андрей Белов</div>
+              <div class="ui-review__meta">2025 · Самара</div>
+            </div>
+          </li>
+          <li class="reviews__item" data-draft="true">
+            <div class="ui-review">
+              <div class="ui-review__text">
+                <p>Цены адекватные, сроки соблюли точно. Монтажники аккуратные, после себя чисто оставили.</p>
+              </div>
+              <div class="ui-review__author">— Наталья Орлова</div>
+              <div class="ui-review__meta">2025 · Чапаевск</div>
+            </div>
+          </li>
+          <li class="reviews__item" data-draft="true">
+            <div class="ui-review">
+              <div class="ui-review__text">
+                <p>Заказывали детскую — учитывали пожелания ребёнка, сделали секретные отсеки, сын в восторге.</p>
+              </div>
+              <div class="ui-review__author">— Елена Петрова</div>
+              <div class="ui-review__meta">2025 · Новокуйбышевск</div>
+            </div>
+          </li>
+          <li class="reviews__item" data-draft="true">
+            <div class="ui-review">
+              <div class="ui-review__text">
+                <p>Офисную мебель подобрали за один визит — эргономичные стулья, столы с регулировкой высоты.</p>
+              </div>
+              <div class="ui-review__author">— Виктор Смирнов</div>
+              <div class="ui-review__meta">2025 · Самара</div>
+            </div>
+          </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section id="faq" class="faq" aria-labelledby="faq-title">
+      <div class="faq__inner ui-container">
+        <div class="faq__eyebrow ui-eyebrow">[ вопросы ]</div>
+        <h2 class="faq__title" id="faq-title">Здесь ответы</h2>
+        <p class="faq__lead">Собрали то, о чём спрашивают чаще всего. Если ответа нет — позвоните, подскажем.</p>
+        <ul class="faq__list">
+          <li class="faq__item">
+            <details class="faq__details">
+              <summary class="faq__question">
+                <span class="faq__question-text">Можно ли заказать мебель по своим размерам?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="faq__answer">
+                <p>Да. Для кухни, шкафа-купе или гардеробной мы готовим отдельный проект под ваше помещение. Учитываем габариты, расположение техники и коммуникаций, а также то, как вы планируете хранить вещи: для встроенного шкафа важна глубина ниши и место для открывания дверей, для кухни — точки подключения воды и электрики.</p>
+                <p>Начать проще всего с заявки на расчёт. Если нужен типовой вариант, посмотрите готовые решения в разделе «Наши работы». Не все модели изготавливаются в любых размерах — возможность доработки конкретного изделия уточняйте при заказе.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq__item">
+            <details class="faq__details">
+              <summary class="faq__question">
+                <span class="faq__question-text">Из чего складывается стоимость мебели на заказ?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="faq__answer">
+                <p>Два шкафа одинакового размера могут отличаться в цене: разными будут фасады, фурнитура, число секций и ящиков. В расчёте мы учитываем конструкцию и комплектацию, поэтому сравнивать предложения корректно только по одинаковым параметрам.</p>
+                <p>Предварительная сумма нужна, чтобы понять бюджет. Итоговую стоимость фиксируем в договоре после замера и выбора материалов. Доставку, подъём и сборку считаем отдельно — их условия зависят от адреса и состава заказа.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq__item">
+            <details class="faq__details">
+              <summary class="faq__question">
+                <span class="faq__question-text">Обязателен ли замер перед оформлением заказа?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="faq__answer">
+                <p>Для мебели по индивидуальным размерам замер нужен: он показывает реальные габариты, неровности стен, выступы и расположение коммуникаций. Особенно это важно для встроенных шкафов и кухонных гарнитуров — проект должен учитывать место установки и свободный ход дверей.</p>
+                <p>Выезд замерщика в Самаре бесплатный — записаться можно через форму на сайте. Примерных размеров хватит для первого обсуждения, но перед изготовлением их обязательно уточняем на месте.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq__item">
+            <details class="faq__details">
+              <summary class="faq__question">
+                <span class="faq__question-text">Где посмотреть материалы и цвета?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="faq__answer">
+                <p>Образцы материалов для корпуса и фасадов привозим на замер — можно сравнить цвета и обсудить фурнитуру. Оттенок на экране часто отличается от того, как материал выглядит при освещении в вашей комнате, поэтому выбирать лучше по образцу.</p>
+                <p>Расскажите, как вы будете пользоваться мебелью и что важно в уходе за ней, — вместе подберём подходящие варианты и обсудим их стоимость. Конкретную комплектацию согласуем при оформлении заказа.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq__item">
+            <details class="faq__details">
+              <summary class="faq__question">
+                <span class="faq__question-text">Доставка и сборка — это одна услуга?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="faq__answer">
+                <p>Нет, это две разные услуги. Доставка по Самаре и пригородам рассчитывается по тарифам в зависимости от адреса и объёма заказа. Подъём на этаж, сборка и установка оплачиваются отдельно.</p>
+                <p>Стоимость и условия доставки и монтажа указываем в договоре до начала работ, чтобы не было неожиданных доплат.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq__item">
+            <details class="faq__details">
+              <summary class="faq__question">
+                <span class="faq__question-text">Куда обратиться, если появился вопрос после установки?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="faq__answer">
+                <p>Позвоните нам или напишите на почту — контакты указаны в разделе «Контакты». Подготовьте договор и короткое описание ситуации, а если речь о дефекте — фотографии мебели: так мы быстрее разберёмся, что произошло.</p>
+              </div>
+            </details>
+          </li>
+          <li class="faq__item">
+            <details class="faq__details">
+              <summary class="faq__question">
+                <span class="faq__question-text">Что подготовить для предварительного расчёта?</span>
+                <span class="faq__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="faq__answer">
+                <p>Достаточно примерной ширины, высоты и глубины будущей мебели, фотографий помещения и примера из наших работ, который вам нравится. Для кухни пригодятся размеры техники, для шкафа — пожелания по полкам, ящикам и отделениям для одежды.</p>
+                <p>Если есть эскиз или дизайн-проект — покажите его. Если проекта нет, начнём с ваших пожеланий: готовый чертёж для первого обращения не обязателен.</p>
+              </div>
+            </details>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section id="measurer" class="measurer" aria-labelledby="measurer-title">
+      <div class="measurer__bg" aria-hidden="true">
+        <img src="images/kitchen-bg.jpg" alt="" width="1920" height="876" loading="lazy" decoding="async">
+      </div>
+      <div class="measurer__inner ui-container">
+        <div class="measurer__card">
+          <h2 class="measurer__title" id="measurer-title">Бесплатный выезд инженера</h2>
+          <p class="measurer__lead">В удобное время специалист приедет с образцами материалов, произведет замер и подскажет лучшее решение.</p>
+          <form action="send.php" class="ui-lead-form" data-lead-form data-source="measurer" method="post">
+            <div class="ui-lead-form__field">
+              <label class="visually-hidden" for="measurer-name">Ваше имя</label>
+              <input class="ui-lead-form__input" id="measurer-name" name="name" type="text"
+                     placeholder="Имя" autocomplete="name" data-validate="name">
+            </div>
+            <span class="ui-lead-form__error" data-error-for="name" hidden></span>
+            <div class="ui-lead-form__field ui-lead-form__field--phone">
+              <label class="visually-hidden" for="measurer-phone">Номер телефона</label>
+              <span class="ui-lead-form__prefix" aria-hidden="true"></span>
+              <input class="ui-lead-form__input" id="measurer-phone" name="phone" type="tel"
+                     inputmode="tel" autocomplete="tel" placeholder="+7(000) 000-00-00" data-validate="phone">
+            </div>
+            <span class="ui-lead-form__error" data-error-for="phone" hidden></span>
+            <button class="ui-lead-form__submit" type="submit">Отправить заявку</button>
+            <p class="ui-lead-form__status" data-form-status aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section id="contacts" class="contacts">
+      <div class="contacts__inner ui-container">
+        <div class="contacts__eyebrow ui-eyebrow">[ контакты ]</div>
+        <div class="contacts__card ui-contact-card">
+          <div class="ui-contact-card__item">
+            <h3 class="ui-contact-card__title">Телефон</h3>
+            <a href="tel:+79991234567" class="ui-contact-card__phone">+7 (987) 123-44-67</a>
+          </div>
+          <div class="ui-contact-card__item">
+            <h3 class="ui-contact-card__title">E-mail</h3>
+            <a href="mailto:info@raznamebel.ru" class="ui-contact-card__mail">info@raznamebel.ru</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="footer__inner ui-container">
+        <p class="footer__copy">© 2026 Мебель-Проект. Все права защищены.</p>
+        <div class="footer__links">
+          <a href="privacy.html" class="footer__link">Политика конфиденциальности</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Плавающий виджет: наверх, обратный звонок, Telegram (>=1200).
+       Классы — по plan.md §«Виджет» и css/sections/widget.css, поведение — js/widget.js. -->
+  <div class="ui-callback" data-callback>
+    <button class="ui-callback__button ui-callback__totop" type="button" aria-label="Наверх" data-totop>
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+        <path d="M5 14l7-7 7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <div class="ui-callback__popup" id="callback-popup" data-callback-popup hidden>
+      <div class="ui-callback__card" role="dialog" aria-modal="true" aria-labelledby="callback-title">
+        <h2 class="ui-callback__title" id="callback-title">Мы скоро вам перезвоним!</h2>
+        <form class="ui-callback__form" action="send.php" method="post"
+              data-callback-form data-lead-form data-source="widget">
+          <input type="hidden" name="source" value="widget">
+          <input type="hidden" name="website" value="">
+          <label class="visually-hidden" for="callback-phone">Номер телефона</label>
+          <input class="ui-callback__input" id="callback-phone" name="phone" type="tel"
+                 inputmode="tel" autocomplete="tel" placeholder="+7 (000) 000-00-00"
+                 required data-callback-field data-validate="phone">
+          <span class="ui-callback__error" data-error-for="phone" hidden></span>
+          <button class="ui-callback__submit" type="submit">Заказать звонок</button>
+          <p class="ui-callback__status" data-form-status aria-live="polite"></p>
+        </form>
+        <p class="ui-callback__alt">или позвоните нам
+          <a class="ui-callback__phone" href="tel:+79991234567">+7 (987) 123-44-67</a>
+        </p>
+      </div>
+      <button class="ui-callback__button ui-callback__button--close" type="button"
+              aria-label="Закрыть форму обратного звонка" data-callback-close>
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true" focusable="false">
+          <path d="M7 7l16 16M23 7L7 23" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="ui-callback__buttons">
+      <a class="ui-callback__button ui-callback__button--tg"
+         href="https://t.me/+79991234567" target="_blank" rel="noopener"
+         aria-label="Написать в Telegram" data-telegram>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+          <path d="M21.94 4.34a1.2 1.2 0 0 0-1.22-.2L2.7 11.1c-.87.34-.85 1.6.03 1.91l4.32 1.5 1.62 5.08c.16.5.66.8 1.17.7.24-.05.46-.18.62-.38l2.36-2.94 4.45 3.26c.35.26.81.3 1.2.1.38-.2.62-.59.62-1.02l.9-13.9c.02-.5-.35-.94-.85-1.07ZM9.4 14.2l9.02-6.4-7.1 7.44a.9.9 0 0 0-.24.52l-.28 2.06-1.4-4.4Z"/>
+        </svg>
+      </a>
+      <button class="ui-callback__button ui-callback__button--call" type="button"
+              aria-expanded="false" aria-controls="callback-popup"
+              aria-label="Заказать обратный звонок" data-callback-toggle>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+          <path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/>
+        </svg>
+      </button>
+    </div>
+
+    <span class="ui-callback__tooltip" role="status">Заказать обратный звонок</span>
+  </div>
+
+  <script src="js/menu.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/forms.js" defer></script>
+  <script src="js/gallery.js" defer></script>
+  <script src="js/works.js" defer></script>
+  <script src="js/widget.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>

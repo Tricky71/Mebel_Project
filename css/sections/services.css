@@ -1,0 +1,349 @@
+/* ==========================================================================
+   services.css — секция Services (мозаика 6 работ + круг CTA)
+   Перенесено из референса (tricky71.github.io/Mebel_br) 1-в-1; изменены только имена блоков и токены цвета. Блок portfolio -> services.
+   ========================================================================== */
+
+.services {
+  background-color: var(--color-bg-light); /* фон принадлежит секции */
+}
+
+/* --- base 390: одна колонка --- */
+.services__inner {
+  padding-top: 90px; /* eyebrow на 90 (экспорт 390) */
+  padding-bottom: var(--space-section-mobile);
+}
+
+/* Eyebrow на светлом: #918E8E дает 2.30 (провал AA) — затемнен до #5C5C5C
+   (4.74, AA). Отклонение от макета, зафиксировано в спеке референса */
+.services__eyebrow {
+  color: var(--color-text-muted-dark);
+}
+
+.services__mosaic {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Обертки рядов <768 прозрачны: ячейки раскладываются напрямую с order.
+   Порядок: h2(1) фото1(2) лид(3) фото2(4) круг(5) фото3(6) фото4(7)
+   фото5(8) note(9) фото6(10) — как в 390-экспорте. */
+.services__row,
+.services__side {
+  display: contents;
+}
+
+.services__title {
+  order: 1;
+  margin-top: 16px; /* eyebrow (90) -> H2 (123), зазор 16 */
+  margin-bottom: 50px; /* H2 (3 строки, ends ~307) -> фото1 (380) */
+  max-width: 450px; /* переносы МЕБЕЛЬ/ПО/ВАШЕМУ/ПРОЕКТУ, как в экспорте
+    («МЕБЕЛЬ ПО» ~411px не влезает; ПРОЕКТУ ~343px целым) */
+  font-size: var(--font-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+  color: var(--color-text-dark);
+  text-transform: uppercase; /* капс через CSS */
+  text-wrap: balance;
+}
+
+/* Вопросительный знак в H2: декоративный акцент (бывший inline-стиль) */
+.services__title-mark {
+  color: var(--color-accent);
+}
+
+.services__lead {
+  order: 3;
+  margin-top: 16px; /* фото1 -> лид (экспорт 390: 685 -> 701) */
+  max-width: 24ch;
+  font-size: 1rem; /* 16 фикс на всех ширинах (экспорт) */
+  font-weight: var(--font-weight-light);
+  line-height: var(--lh-body);
+  color: var(--color-text-dark);
+  text-wrap: pretty; /* ровный правый край без висячих союзов */
+}
+
+.services-card {
+  position: relative; /* якорь вертикальных подписей >=768 */
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* подпись — фото: один зазор для всех карточек */
+  min-width: 0;
+  margin: 0; /* сброс figure-margin */
+}
+
+/* Круг-CTA <768: в потоке после фото 2, нахлест половиной на стык */
+.services__cta {
+  order: 5;
+  justify-self: end;
+  margin-top: calc(var(--cta-circle) / -2);
+}
+
+.services-card--p1 { order: 2; aspect-ratio: 600 / 520; }
+.services-card--p2 { order: 4; aspect-ratio: 300 / 400; }
+.services-card--p3 { order: 6; aspect-ratio: 760 / 400; }
+.services-card--p4 { order: 7; aspect-ratio: 860 / 520; }
+.services-card--p5 { order: 8; aspect-ratio: 760 / 400; }
+.services-card--p6 { order: 10; aspect-ratio: 300 / 400; }
+
+/* img вне потока только >=768; <768 — в потоке под подписью.
+   Подпись <768: НАД фото (order), выравнивание по карточке:
+   p1/p3/p5 слева, p2/p4/p6 справа. */
+.services-card img {
+  position: static;
+  width: 100%;
+  height: auto;
+  aspect-ratio: inherit; /* пропорция карточки (600/520 и т.д.) */
+  object-fit: cover;
+}
+
+/* Подпись <768: горизонтальная НАД фото (вертикаль 390-экспорта наполовину
+   за вьюпортом — артефакт, см. portfolio.md §10). */
+.services-card__caption {
+  order: -1;
+  margin-top: 0;
+  font-size: var(--font-caption);
+  font-weight: var(--font-weight-light);
+  line-height: var(--lh-body);
+  color: var(--color-text-dark);
+}
+
+.services-card--p1 .services-card__caption,
+.services-card--p3 .services-card__caption,
+.services-card--p5 .services-card__caption {
+  text-align: left;
+}
+
+.services-card--p2 .services-card__caption,
+.services-card--p4 .services-card__caption,
+.services-card--p6 .services-card__caption {
+  text-align: right;
+}
+
+.services__note {
+  order: 9;
+  max-width: 24ch;
+  font-size: 1rem;
+  font-weight: var(--font-weight-light);
+  line-height: var(--lh-body);
+  color: var(--color-text-dark);
+  text-wrap: balance; /* 3 строки в 201px, как геометрия экспорта */
+}
+
+/* --- >=768: мозаика десктопной композиции (треки — точные fr-пропорции
+   экспорта; кроп краев через cover + overflow hidden, без выноса за экран) --- */
+@media (min-width: 768px) {
+  .services__inner {
+    padding-block: 120px;
+  }
+
+  .services {
+    overflow: hidden; /* кроп мозаики по краям, без горизонтального скролла */
+  }
+
+  .services__mosaic {
+    display: block; /* ряды — независимые блоки */
+  }
+
+  .services__row {
+    display: grid;
+    min-width: 0;
+  }
+
+  /* Сброс мобильного порядка: ряды идут по DOM */
+  .services__title,
+  .services__lead,
+  .services-card,
+  .services__cta,
+  .services__note {
+    order: initial;
+  }
+
+  .services__title {
+    margin-bottom: 0;
+  }
+
+  .services__row--r1 {
+    grid-template-columns: minmax(0, 560fr) minmax(0, 600fr);
+  margin-bottom: 60px;
+  }
+
+  .services__row--r1 .services__title {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .services__row--r1 .services__lead {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 32px;
+  }
+
+  .services__row--r1 .services-card--p1 {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .services__row--r2 {
+    grid-template-columns: minmax(0, 300fr) minmax(0, 100fr) minmax(0, 760fr);
+    margin-bottom: 60px;
+  }
+
+  .services__row--r2 .services-card--p2 {
+    grid-column: 1;
+  }
+
+  .services__row--r2 .services-card--p3 {
+    grid-column: 3;
+  }
+
+  .services__row--r3 {
+    grid-template-columns: minmax(0, 860fr) minmax(0, 300fr);
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+
+  .services__row--r3 .services-card--p4 {
+    grid-column: 1;
+  }
+
+  /* Сайдбар: display:grid снимает наследованный display:contents из базы —
+     без собственного бокса grid-column/align-self не применяются. */
+  .services__side {
+    display: grid;
+    grid-template-rows: 1fr auto; /* свободное место + контент */
+    align-content: stretch;
+    justify-items: center; /* CTA и note по центру колонки */
+    min-width: 0;
+    gap: 0;
+  }
+
+  .services__row--r3 .services__side {
+    grid-column: 2;
+    align-self: stretch; /* сайдбар растянут по высоте ряда r3 */
+  }
+
+  .services__cta {
+    align-self: center;
+    justify-self: center;
+    margin: 0;
+  }
+
+  .services__note {
+    align-self: end;
+    justify-self: center;
+  }
+
+  .services__row--r4 {
+    grid-template-columns: minmax(0, 760fr) minmax(0, 100fr) minmax(0, 300fr);
+  }
+
+  .services__row--r4 .services-card--p5 {
+    grid-column: 1;
+  }
+
+  .services__row--r4 .services-card--p6 {
+    grid-column: 3;
+  }
+
+  .services-card {
+    display: block; /* сброс base-flex: подпись и фото абсолютны */
+  }
+
+  .services-card img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  /* Подписи >=768: все СНАРУЖИ figure, вынос единый 5px для всех карточек.
+     bottom-to-top, как rotate(-90deg) в макете. */
+  .services-card__caption {
+    position: absolute;
+    margin-top: 0;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    letter-spacing: var(--ls-caption);
+  }
+
+  /* p1 «шкафы»: слева от фото, в текстовой зоне */
+  .services-card--p1 .services-card__caption {
+    top: 0;
+    right: calc(100% + 5px);
+  }
+
+  /* p2 «комоды»: справа от фото (в gap), внизу */
+  .services-card--p2 .services-card__caption {
+    bottom: 12px;
+    left: calc(100% + 5px);
+  }
+
+  /* p3 «ванная»: слева от фото (в gap), вверху */
+  .services-card--p3 .services-card__caption {
+    top: 0;
+    right: calc(100% + 5px);
+  }
+
+  /* p4 «КУХНИ»: справа от фото, вверху */
+  .services-card--p4 .services-card__caption {
+    top: 0;
+    left: calc(100% + 5px);
+  }
+
+  /* p5 «детские»: справа от фото (в gap), вверху */
+  .services-card--p5 .services-card__caption {
+    top: 0;
+    left: calc(100% + 5px);
+  }
+
+  /* p6 «мебель в офис»: слева от фото (в gap), внизу */
+  .services-card--p6 .services-card__caption {
+    bottom: 12px;
+    right: calc(100% + 5px);
+  }
+}
+
+/* --- >=1200: те же треки в контейнере 1160 --- */
+@media (min-width: 1200px) {
+  /* Специфичность 0,2,0 — иначе проигрывает правилу >=768 (тот же селектор) */
+  .services__row--r1 .services__lead {
+    margin-top: 125px; /* H2 (ends 489) -> лид (614) из экспорта */
+    max-width: 270px;
+    /* line-height: 1.2; */
+  }
+
+  /* Фото 1 ниже верха ряда на 33 (экспорт: ряд 137, фото 170) */
+  .services__row--r1 .services-card--p1 {
+    margin-top: 33px;
+  }
+
+  /* Колонка-сайдбар ряда 3: колонка grid.
+     CTA центрируется по горизонтали, note прижат к низу (grid + auto-margin). */
+  .services__side {
+    display: grid;
+    grid-template-rows: 1fr auto; /* 1fr — свободное место, auto — контент */
+    align-content: stretch; /* растянуть строки на всю высоту ряда */
+    justify-items: center; /* CTA и note по центру колонки */
+    min-width: 0;
+    gap: 0;
+  }
+
+  /* Центрируем круг в верхней (растянутой) строке */
+  .services__cta {
+    align-self: center; /* по вертикали — центр свободной строки */
+    justify-self: center; /* по горизонтали — центр колонки */
+    margin: 0;
+    display: flex;
+    justify-content: center; /* размеры задаёт .ui-cta-circle */
+  }
+
+  /* Note — в нижней строке, прижат к низу контейнера */
+  .services__note {
+    align-self: end; /* прижать к нижней границе строки/контейнера */
+    justify-self: center;
+    margin: 0;
+    max-width: 235px; /* 3 строки: в 201px реальный Inter дает 4 (геометрия
+      экспорта недостижима); правый край совпадает с макетом (1540) */
+  }
+}

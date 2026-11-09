@@ -1,0 +1,359 @@
+/* ==========================================================================
+   ui.css — общие компоненты: eyebrow, круг-CTA, форма заявки (ui-lead-form),
+   загрузка файла, вкладки, статус отправки.
+   Eyebrow, круг-CTA и форма перенесены из референса; светлая форма, файл,
+   вкладки и статусы — новые (требования R-100…R-123, R-140…R-144).
+   ========================================================================== */
+
+/* --- Спрайт SVG-иконок (R-02: без inline-стилей) --- */
+.ui-icon-sprite {
+  display: none;
+}
+
+/* --- Eyebrow «[ текст ]» --- */
+.ui-eyebrow {
+  font-size: var(--font-eyebrow);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--lh-tight);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* --- Круг CTA (позиция — секционная) --- */
+.ui-cta-circle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--cta-circle);
+  height: var(--cta-circle);
+  padding: 16px;
+  border-radius: var(--radius-circle);
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-size: var(--font-cta-circle);
+  font-weight: var(--font-weight-medium);
+  line-height: 20px;
+  text-align: center;
+  text-decoration: none;
+  text-wrap: balance;
+  transition: background-color var(--transition-base), transform var(--transition-base);
+}
+
+.ui-cta-circle:hover {
+  background-color: var(--color-accent-hover);
+  transform: scale(1.2);
+}
+
+.ui-cta-circle:focus-visible {
+  outline: 2px solid var(--color-text-dark);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-cta-circle {
+    transition: none;
+  }
+
+  .ui-cta-circle:hover {
+    transform: none;
+  }
+}
+
+/* --- Форма заявки (тёмный вариант по умолчанию, как в референсе) --- */
+.ui-lead-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ui-lead-form__field {
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  margin-bottom: var(--comm-field-gap);
+  border-bottom: 1px solid var(--color-surface);
+}
+
+.ui-lead-form__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-none);
+  background: transparent;
+  color: var(--color-surface);
+  font: inherit;
+  font-size: var(--font-field);
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
+}
+
+.ui-lead-form__input::placeholder {
+  color: rgb(255 255 255 / 50%);
+  opacity: 1;
+}
+
+.ui-lead-form__input:focus {
+  outline: none; /* фокус показывает линия поля: :focus-within ниже */
+}
+
+.ui-lead-form__field:focus-within {
+  border-bottom-width: 3px;
+  margin-bottom: calc(var(--comm-field-gap) - 2px);
+}
+
+.ui-lead-form__prefix {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 10px;
+  margin-right: 10px;
+  font-size: var(--font-field);
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
+  color: var(--color-surface);
+}
+
+.ui-lead-form__field--phone .ui-lead-form__input {
+  font-size: var(--font-mask);
+}
+
+.ui-lead-form__field.is-invalid {
+  border-bottom-color: var(--color-accent-text-dark);
+}
+
+.ui-lead-form__error {
+  min-width: 0;
+  margin: -12px 0 var(--comm-field-gap);
+  overflow-wrap: break-word;
+  font-size: var(--font-note);
+  line-height: var(--lh-body);
+  color: var(--color-accent-text-dark);
+}
+
+.ui-lead-form__error:empty {
+  display: none;
+}
+
+.ui-lead-form__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 50px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: var(--radius-none);
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font: inherit;
+  font-size: var(--font-btn-desktop);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--lh-tight);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+.ui-lead-form__submit:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.ui-lead-form__submit[disabled] {
+  cursor: progress;
+  opacity: 0.6;
+}
+
+.ui-lead-form__note {
+  margin-top: 20px;
+  min-width: 0;
+  overflow-wrap: break-word;
+  text-align: center;
+  font-size: var(--font-note);
+  font-weight: var(--font-weight-light);
+  line-height: var(--lh-body);
+  color: var(--color-text-light);
+}
+
+.ui-lead-form__note a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Статус отправки (aria-live): успех / ошибка */
+.ui-lead-form__status {
+  min-width: 0;
+  margin-top: 16px;
+  overflow-wrap: break-word;
+  font-size: var(--font-field);
+  line-height: var(--lh-body);
+}
+
+.ui-lead-form__status:empty {
+  display: none;
+}
+
+.ui-lead-form__status.is-success {
+  color: var(--color-text-light);
+}
+
+.ui-lead-form__status.is-error {
+  color: var(--color-accent-text-dark);
+}
+
+/* Honeypot: скрыт для людей, виден роботам */
+.ui-lead-form__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+
+/* --- Светлая форма (карточка замера, белый фон) --- */
+.ui-lead-form--light .ui-lead-form__field {
+  border-bottom-color: var(--color-text-dark);
+}
+
+.ui-lead-form--light .ui-lead-form__input,
+.ui-lead-form--light .ui-lead-form__prefix {
+  color: var(--color-text-dark);
+}
+
+.ui-lead-form--light .ui-lead-form__input::placeholder {
+  color: var(--color-text-muted-dark);
+}
+
+.ui-lead-form--light .ui-lead-form__field.is-invalid {
+  border-bottom-color: var(--color-error);
+}
+
+.ui-lead-form--light .ui-lead-form__error,
+.ui-lead-form--light .ui-lead-form__status.is-error {
+  color: var(--color-error);
+}
+
+.ui-lead-form--light .ui-lead-form__status.is-success {
+  color: var(--color-success);
+}
+
+.ui-lead-form--light .ui-lead-form__note {
+  color: var(--color-text-muted-dark);
+}
+
+.ui-lead-form--light .ui-lead-form__submit {
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.ui-lead-form--light .ui-lead-form__submit:hover {
+  background-color: var(--color-accent-hover);
+}
+
+/* --- Загрузка файлов (расчёт по фото) --- */
+.ui-file {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  margin-bottom: var(--comm-field-gap);
+}
+
+.ui-file__label {
+  font-size: var(--font-field);
+  line-height: var(--lh-tight);
+}
+
+.ui-file__input {
+  min-width: 0;
+  padding: 10px 0;
+  font: inherit;
+  font-size: var(--font-mask);
+  color: inherit;
+}
+
+.ui-file__hint {
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: var(--font-note);
+  line-height: var(--lh-body);
+  color: var(--color-text-muted-dark);
+}
+
+.ui-lead-form__area {
+  width: 100%;
+  min-height: 96px;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid var(--color-text-dark);
+  border-radius: var(--radius-none);
+  background: transparent;
+  color: var(--color-text-dark);
+  font: inherit;
+  font-size: var(--font-field);
+  line-height: var(--lh-body);
+  resize: vertical;
+}
+
+.ui-lead-form__area:focus {
+  outline: none;
+  border-bottom-width: 3px;
+}
+
+/* --- Вкладки (блок замера) --- */
+.ui-tabs__list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--color-text-muted-dark);
+}
+
+.ui-tabs__tab {
+  flex: 1 1 50%;
+  min-height: var(--burger-hit);
+  padding: 10px 12px;
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: var(--radius-none);
+  background: transparent;
+  color: var(--color-text-muted-dark);
+  font: inherit;
+  font-size: var(--font-tab);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+  text-align: center;
+  cursor: pointer;
+  transition: color var(--transition-base), border-color var(--transition-base);
+}
+
+.ui-tabs__tab[aria-selected="true"] {
+  border-bottom-color: var(--color-accent);
+  color: var(--color-text-dark);
+}
+
+.ui-tabs__tab:hover {
+  color: var(--color-text-dark);
+}
+
+/* Без JS вкладки скрыты, обе панели видны подряд */
+.ui-tabs:not(.is-ready) .ui-tabs__list {
+  display: none;
+}
+
+.ui-tabs__panel + .ui-tabs__panel {
+  margin-top: 32px;
+}
+
+.ui-tabs.is-ready .ui-tabs__panel + .ui-tabs__panel {
+  margin-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-tabs__tab,
+  .ui-lead-form__submit {
+    transition: none;
+  }
+}

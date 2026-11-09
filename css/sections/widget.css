@@ -1,0 +1,300 @@
+/* ==========================================================================
+   widget.css — плавающий виджет (наверх, звонок, Telegram, попап звонка)
+   Перенесено из референса (tricky71.github.io/Mebel_br); изменены имена блоков,
+   токены цвета и мессенджер: WhatsApp заменён на Telegram (голубой круг).
+   ========================================================================== */
+
+.ui-callback {
+  position: fixed;
+  right: var(--callback-offset);
+  bottom: var(--callback-offset);
+  z-index: var(--z-callback);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--callback-gap);
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+/* Виджет появляется только после первого экрана (низ hero ушёл выше вьюпорта).
+   Класс .is-visible ставит widget.js. Без JS кнопки не показываем — они
+   дублируют ссылки шапки и не нужны в первом экране. */
+.ui-callback:not(.is-visible) {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.ui-callback.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* --- Кнопка «наверх» 60x60: первый элемент стека (поверх кнопок),
+   появляется внутри виджета после 600px прокрутки (.is-visible ставит widget.js).
+   Стрелка — акцентного цвета на светлом круге. --- */
+.ui-callback__button.ui-callback__totop {
+  display: none;
+  background-color: var(--color-surface);
+  color: var(--color-accent);
+}
+
+.ui-callback__button.ui-callback__totop.is-visible {
+  display: inline-flex;
+}
+
+/* --- Стек кнопок: Telegram сверху, звонок снизу --- */
+.ui-callback__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--callback-gap);
+}
+
+.ui-callback__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--callback-size);
+  height: var(--callback-size);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-circle);
+  box-shadow: var(--shadow-callback);
+  cursor: pointer;
+  transition: transform var(--transition-base), background-color var(--transition-base);
+}
+
+.ui-callback__button:hover {
+  transform: scale(1.08);
+}
+
+.ui-callback__button svg {
+  display: block;
+  width: 30px; /* иконка ~50% круга (buttons.jpg, whats.jpg) */
+  height: 30px;
+}
+
+.ui-callback__button--call {
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.ui-callback__button--call:hover {
+  background-color: var(--color-accent-hover);
+}
+
+/* Telegram виден только >=1200px */
+.ui-callback__button--tg {
+  display: none;
+  background-color: var(--color-telegram);
+  color: var(--color-surface); /* белая иконка на голубом */
+  text-decoration: none;
+}
+
+/* --- Тултип (structure.md C16): показывается при наведении/фокусе --- */
+.ui-callback__tooltip {
+  position: absolute;
+  right: calc(100% + var(--callback-gap));
+  bottom: calc(var(--callback-size) / 2);
+  transform: translateY(50%);
+  padding: 8px 12px;
+  border-radius: 3px; /* structure.md §7 */
+  background-color: var(--color-tooltip);
+  color: var(--color-surface);
+  font-size: var(--font-tg);
+  line-height: var(--lh-tight);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.ui-callback:hover .ui-callback__tooltip,
+.ui-callback:focus-within .ui-callback__tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* --- Попап формы 360x350 (form.jpg) --- */
+.ui-callback__popup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--callback-gap);
+}
+
+.ui-callback__popup[hidden] {
+  display: none;
+}
+
+.ui-callback__card {
+  width: min(var(--callback-form-w), calc(100vw - var(--callback-offset) * 2));
+  min-height: var(--callback-form-h); /* 350 фикс макета; растёт при крупном тексте (defensive) */
+  padding: var(--callback-form-pad);
+  border-radius: var(--radius-callback-form);
+  background-color: var(--color-surface);
+  color: var(--color-callback-ink);
+  box-shadow: var(--shadow-callback);
+  text-align: center;
+}
+
+.ui-callback__title {
+  min-width: 0;
+  margin: 0 0 16px;
+  overflow-wrap: break-word;
+  font-size: var(--font-callback-title);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--lh-tight);
+}
+
+.ui-callback__form {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ui-callback__input {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 4px;
+  border: none;
+  border-bottom: 1px solid var(--color-text-muted);
+  border-radius: var(--radius-none);
+  background: transparent;
+  color: var(--color-callback-ink);
+  font: inherit;
+  font-size: var(--font-contact);
+  text-align: center;
+}
+
+.ui-callback__input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+.ui-callback__submit {
+  width: 100%;
+  min-height: 50px; /* хит-зона + ритм попапа (form.jpg) */
+  margin-top: 16px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: var(--radius-none);
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-size: var(--font-callback-text);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+}
+
+.ui-callback__submit:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.ui-callback__alt {
+  min-width: 0;
+  margin-top: 16px;
+  overflow-wrap: break-word;
+  font-size: var(--font-callback-text);
+  line-height: var(--lh-body);
+  color: var(--color-text-muted-dark);
+}
+
+.ui-callback__phone {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--color-callback-ink);
+  font-size: var(--font-callback-phone);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+}
+
+/* Белый круг X под карточкой справа (form.jpg) */
+.ui-callback__button--close {
+  background-color: var(--color-surface);
+  color: var(--color-callback-ink);
+}
+
+/* --- Ошибка и статус отправки в попапе (widget.js + forms.js) --- */
+.ui-callback__error {
+  display: block;
+  margin-top: 6px;
+  color: var(--color-error);
+  font-size: var(--font-tg);
+  line-height: var(--lh-tight);
+  text-align: left;
+}
+
+.ui-callback__error[hidden] {
+  display: none;
+}
+
+.ui-callback__status {
+  margin-top: 10px;
+  font-size: var(--font-callback-text);
+  line-height: var(--lh-tight);
+  text-align: center;
+}
+
+.ui-callback__status:empty {
+  display: none;
+}
+
+.ui-callback__status.is-success {
+  color: var(--color-success);
+}
+
+.ui-callback__status.is-error {
+  color: var(--color-error);
+}
+
+/* Тёмные плейсхолдеры: контраст на белой карточке (форма уже в палитре карточки) */
+.ui-callback__card ::placeholder {
+  color: var(--color-text-muted-dark);
+  opacity: 1;
+}
+
+/* Поле с ошибкой — красная линия снизу */
+.ui-callback__input.is-invalid {
+  border-bottom-color: var(--color-error);
+}
+
+/* На белом попапе белый outline из base.css не виден — тёмный контур */
+.ui-callback__card a:focus-visible,
+.ui-callback__card button:focus-visible,
+.ui-callback__button--close:focus-visible {
+  outline: 2px solid var(--color-callback-ink);
+  outline-offset: 3px;
+}
+
+.ui-callback__input:focus {
+  outline: none;
+  border-bottom-color: var(--color-callback-ink);
+}
+
+/* --- >=1200px: появляется Telegram --- */
+@media (min-width: 1200px) {
+  .ui-callback__button--tg {
+    display: inline-flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-callback {
+    transition: none;
+  }
+
+  .ui-callback__button,
+  .ui-callback__tooltip,
+  .ui-callback__submit {
+    transition: none;
+  }
+
+  .ui-callback__button:hover {
+    transform: none;
+  }
+}

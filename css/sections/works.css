@@ -1,0 +1,353 @@
+/* ==========================================================================
+   works.css — «Наши работы»: единая мозаика + кнопка «Показать ещё».
+   Композиция повторяет макет: 4 колонки, тайлы разной высоты в заданном
+   порядке — вертикаль (1 кол.) → горизонталь (2 кол.) → вертикаль (1 кол.),
+   следующий ряд: горизонталь (2 кол.) × 2.
+   Кнопка «Показать ещё» стоит по центру ПОД сеткой.
+   Mobile-First: <768 — 2 колонки, >=768 — 4 колонки (пропорции макета).
+   Поведение кнопки — js/works.js. Лайтбокс — js/gallery.js.
+   ========================================================================== */
+
+.works {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-light);
+}
+
+.works__inner {
+  padding-top: var(--space-section-mobile);
+  padding-bottom: var(--space-section-mobile);
+}
+
+/* Eyebrow на тёмном фоне: #918E8E даёт 4,84 (AA) */
+.works__eyebrow {
+  color: var(--color-text-muted);
+}
+
+.works__title {
+  min-width: 0;
+  margin-top: 16px;
+  overflow-wrap: break-word;
+  font-size: var(--font-works-title);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.works__lead {
+  max-width: 48ch;
+  margin-top: 20px;
+  font-size: var(--font-body);
+  line-height: var(--lh-body);
+}
+
+.works__lead:empty {
+  display: none;
+}
+
+/* --- Мозаика ---
+   Пропорции ФИКСИРОВАННЫЕ и не зависят от размеров загруженного фото:
+   строка сетки имеет заданную высоту, а картинка заполняет ячейку через
+   object-fit: cover. Это делает вёрстку устойчивой к любым фото из админки
+   (портретным, пейзажным, квадратным) — ничего не «прыгает» и не ломается.
+   dense — плотная укладка: следующая плитка занимает пустоту в ряду. */
+.works__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-flow: row dense;
+  grid-auto-rows: clamp(150px, 42vw, 240px); /* фиксированная высота строки */
+  gap: var(--works-gap);
+  margin-top: 40px;
+  padding: 0;
+  list-style: none;
+}
+
+/* Плитка занимает всю высоту строки сетки */
+.works__item {
+  min-width: 0;
+  height: 100%;
+}
+
+/* Превью: кнопка на всю карточку */
+.works-thumb {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-none);
+  background-color: var(--color-bg-dark-2);
+  cursor: zoom-in;
+}
+
+/* Фото всегда заполняет ячейку целиком, пропорции не искажаются */
+.works-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 400ms ease;
+}
+
+/* --- Ширина плитки в колонках: горизонталь занимает 2 места --- */
+.works__item--wide {
+  grid-column: span 2;
+}
+
+.works-thumb:hover img {
+  transform: scale(1.04);
+}
+
+/* --- Кнопка «Показать ещё»: под сеткой, по центру --- */
+.works__more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(32px, 5vw, 56px);
+}
+
+.works__more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--btn-min-desktop);
+  min-height: 52px;
+  padding: 12px 28px;
+  border: 0;
+  border-radius: var(--radius-none);
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font: inherit;
+  font-size: var(--font-btn-desktop);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--lh-tight);
+  text-align: center;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+}
+
+.works__more-btn:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.works__more-btn:focus-visible {
+  outline: 2px solid var(--color-surface);
+  outline-offset: 3px;
+}
+
+.works__more[hidden] {
+  display: none; /* фото закончились */
+}
+
+/* --- Лайтбокс --- */
+.ui-lightbox {
+  position: fixed;   /* dialog в modal-режиме центрируется: фиксируем на весь экран */
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  color: var(--color-text-light);
+  overflow: hidden;
+  touch-action: pan-y; /* разрешаем вертикальную прокрутку, горизонталь — наш свайп */
+}
+
+.ui-lightbox::backdrop {
+  background-color: var(--lightbox-bg);
+}
+
+.ui-lightbox__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 56px 16px 16px; /* компактные поля: фото занимает максимум места */
+}
+
+.ui-lightbox__figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;      /* фигура растягивается на всю доступную высоту */
+  max-width: 100%;
+  min-height: 0;       /* иначе flex-child не сжимается и фото обрезается */
+  min-width: 0;
+  margin: 0;
+}
+
+/* Фото в полный размер: вписано в экран без обрезки, занимает максимум места */
+.ui-lightbox__img {
+  display: block;
+  flex: 1 1 auto;
+  max-width: 100%;
+  max-height: 100%;
+  min-height: 0;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;          /* фото кликабельно: свайп/жест мышью */
+  user-select: none;        /* не выделяем фото при протягивании мышью */
+  -webkit-user-drag: none;  /* Safari: не перетаскиваем картинку */
+}
+
+.ui-lightbox__caption {
+  flex: 0 0 auto;
+  min-width: 0;
+  max-width: 60ch;
+  margin-top: 12px;
+  overflow-wrap: break-word;
+  font-size: var(--font-body);
+  line-height: var(--lh-body);
+  text-align: center;
+}
+
+.ui-lightbox__caption:empty {
+  display: none;
+}
+
+.ui-lightbox__counter {
+  margin-top: 8px;
+  font-size: var(--font-note);
+  color: var(--color-text-light);
+}
+
+.ui-lightbox__error {
+  padding: 24px;
+  font-size: var(--font-body);
+  text-align: center;
+}
+
+/* --- Кнопки лайтбокса: иконки акцентного цвета, без рамок и фона --- */
+.ui-lightbox__btn {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--burger-hit);   /* 44px — хит-зона (WCAG 2.5.8) */
+  height: var(--burger-hit);
+  padding: 0;
+  border: 0;                  /* без рамки */
+  border-radius: 0;
+  background: none;           /* без фона */
+  color: var(--color-accent); /* акцентный цвет иконки */
+  cursor: pointer;
+  transition: color var(--transition-base), transform var(--transition-base);
+}
+
+.ui-lightbox__btn svg {
+  display: block;
+  width: 28px;
+  height: 28px;
+}
+
+.ui-lightbox__btn:hover {
+  color: var(--color-accent-hover);
+  transform: scale(1.12);
+}
+
+.ui-lightbox__btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.ui-lightbox__btn--close {
+  top: 12px;
+  right: 12px;
+}
+
+.ui-lightbox__btn--prev,
+.ui-lightbox__btn--next {
+  bottom: 12px;
+}
+
+.ui-lightbox__btn--prev {
+  left: 12px;
+}
+
+.ui-lightbox__btn--next {
+  right: 12px;
+}
+
+.ui-lightbox[data-single] .ui-lightbox__btn--prev,
+.ui-lightbox[data-single] .ui-lightbox__btn--next {
+  display: none; /* одна работа: листать нечего */
+}
+
+@media (min-width: 768px) {
+  /* 4 колонки — композиция макета: вертикаль/горизонталь(2)/вертикаль.
+     Высота строки растёт, т.к. колонки стали уже. */
+  .works__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: clamp(200px, 24vw, 300px);
+  }
+
+  .ui-lightbox__inner {
+    padding: 64px 88px 48px; /* поля только под кнопки, фото — максимум места */
+  }
+
+  .ui-lightbox__img {
+    max-height: 100%; /* ограничение задаёт флекс-контейнер */
+  }
+
+  .ui-lightbox__btn--prev,
+  .ui-lightbox__btn--next {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+  }
+
+  /* Hover сохраняет вертикальное центрирование и добавляет масштаб */
+  .ui-lightbox__btn--prev:hover,
+  .ui-lightbox__btn--next:hover {
+    transform: translateY(-50%) scale(1.12);
+  }
+
+  .ui-lightbox__btn--prev {
+    left: 24px;
+  }
+
+  .ui-lightbox__btn--next {
+    right: 24px;
+  }
+
+  .ui-lightbox__btn svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .works-thumb img,
+  .ui-lightbox__btn {
+    transition: none;
+  }
+
+  .works-thumb:hover img {
+    transform: none;
+  }
+
+  .ui-lightbox__btn:hover {
+    transform: none;
+  }
+
+  /* На >=768 кнопки центрируются translateY — сохраняем центрирование без масштаба */
+  .ui-lightbox__btn--prev:hover,
+  .ui-lightbox__btn--next:hover {
+    transform: translateY(-50%);
+  }
+
+  .works-thumb.is-placeholder {
+    animation: none;
+  }
+}

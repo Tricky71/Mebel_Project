@@ -1,0 +1,195 @@
+/* ==========================================================================
+   facts.css — секция Facts («[ факты о нас ]», 4 строки ui-stat, фото 500x800)
+   Перенесено из референса (tricky71.github.io/Mebel_br) 1-в-1; изменены только имена блоков и токены цвета. Содержимое наше.
+   ========================================================================== */
+
+.facts {
+  background-color: var(--color-bg-dark); /* фон принадлежит секции (defensive) */
+}
+
+/* --- base 390: столбец; фото скрыто (подтверждено facts-390.png) --- */
+.facts__inner {
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--space-section-mobile);
+  padding-bottom: var(--space-section-mobile);
+}
+
+.facts__eyebrow {
+  margin-bottom: var(--space-facts-eyebrow);
+}
+
+.facts__media {
+  display: none;
+  margin: 0; /* сброс дефолтного figure-margin */
+}
+
+.facts__list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Разделители — border, без div: между строками сверху, после последней снизу.
+   У первой строки верхней границы нет (экспорт: первый разделитель на 283). */
+.facts__item {
+  min-width: 0;
+  padding-bottom: var(--facts-row-bottom);
+  padding-right: 30px;
+  /* Контент уже разделителей: на 390 иконки на x46 при контейнере x20,
+     на 768 — x75 при x49. Border при этом во всю ширину li. */
+}
+
+.facts__item + .facts__item {
+  padding-top: var(--facts-row-top);
+  border-top: 1px solid var(--color-line);
+}
+
+.facts__item:last-child {
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* Строка факта, base: ряд «иконка + значение», текст ниже на всю ширину */
+.ui-stat {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  grid-template-areas:
+    "icon value"
+    "text text";
+  column-gap: var(--space-stat-gap);
+  row-gap: 20px;
+  min-width: 0;
+}
+
+.ui-stat__icon {
+  grid-area: icon;
+  align-self: start;
+  width: 52px;
+  height: 52px;
+  color: var(--color-accent); /* стрелка декоративная (aria-hidden) */
+  fill: var(--color-accent);
+}
+
+.ui-stat__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Направления стрелок: базовый артворк arrow-2.svg смотрит ↙,
+   повороты под ↖ ← ↑ (без инлайн-стилей). */
+.ui-stat__icon--nw {
+  transform: rotate(90deg);
+}
+
+.ui-stat__icon--w {
+  transform: rotate(45deg);
+}
+
+.ui-stat__icon--n {
+  transform: rotate(135deg);
+}
+
+.ui-stat__value {
+  grid-area: value;
+  align-self: start;
+  min-width: 0;
+  overflow-wrap: anywhere; /* defensive: длинное значение не распирает колонку */
+  font-size: var(--font-stat); /* 60 -> 70 fluid, без скачков на брейкпоинтах */
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+  color: var(--color-text-light);
+}
+
+/* 16px фикс на всех ширинах: в макете 16 и на 390, и на 1920 (отклонение
+   от fluid-принципа ради PP, зафиксировано). */
+.ui-stat__text {
+  grid-area: text;
+  min-width: 0;
+  overflow-wrap: break-word; /* defensive: длинные RU-строки */
+  font-size: 1rem;
+  font-weight: var(--font-weight-light);
+  line-height: var(--lh-body);
+  color: var(--color-text-light);
+}
+
+/* --- >=768: строка в 2 колонки (иконка над текстом слева, значение справа).
+   Фото все еще скрыто (подтверждено facts-768.png). --- */
+@media (min-width: 768px) {
+  /* Значение — по контенту (max-content: не переносится), тексту — остаток.
+     На 1920: 233 + 32 + остаток; текст дополнительно ограничен 24ch. */
+  .ui-stat {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    grid-template-areas:
+      "icon value"
+      "text value";
+    row-gap: var(--facts-row-gap);
+    align-content: start;
+  }
+
+  .ui-stat__text {
+    max-width: var(--stat-label-max);
+  }
+
+  /* Низ значения и текста сходятся над разделителем (экспорт: pad 20-22) */
+  .ui-stat__value {
+    align-self: end;
+    text-align: right;
+  }
+}
+
+/* --- >=1200: Grid «eyebrow+фото | список»; eyebrow слева над фото (380,67).
+   Фото и список всегда одинаковой высоты (stretch + cover). --- */
+@media (min-width: 1200px) {
+  .facts__inner {
+    display: grid;
+    grid-template-columns: minmax(0, var(--facts-media-fluid)) minmax(0, 1fr);
+    align-items: stretch; /* колонки тянутся под самую высокую */
+    padding-top: var(--facts-top);
+    padding-bottom: var(--facts-bottom);
+  }
+
+  .facts__eyebrow {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
+
+  .facts__media {
+    position: relative; /* якорь overlay ::after */
+    display: block;
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  /* Overlay как в hero (темнее сверху, к низу сходит на нет) */
+  .facts__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      var(--color-overlay-top),
+      var(--color-overlay) 45%,
+      transparent 80%
+    );
+  }
+
+  .facts__media img {
+    width: 100%;
+    height: 100%; /* тянется под высоту списка, кроп через cover */
+    object-fit: cover;
+  }
+
+  .facts__list {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .facts__media-inner {
+    background-image: url('../../images/about.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+  }
+}

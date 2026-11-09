@@ -1,0 +1,203 @@
+/* ==========================================================================
+   reviews.css — «Отзывы»: текстовые карточки (R-90…R-92).
+   В референсе секция показывает бейджи площадок, у нас — текст отзывов:
+   фон, шапка и разделители взяты оттуда, карточки новые.
+   Mobile-First: 1 колонка -> 2 (768) -> 4 в ряд (1200). Все отзывы — черновики.
+   ========================================================================== */
+
+.reviews {
+  position: relative;
+  overflow: hidden; /* кроп фото по краям секции */
+  background-color: var(--color-bg-dark-2); /* #363636: цвет фона секции */
+  color: var(--color-text-light);
+}
+
+/* Фон-фото (faq-bg.jpg) с сильным затемнением в текущий цвет фона.
+   Слой декоративный: абсолютный, растянут на секцию, z-index ниже контента. */
+.reviews__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.reviews__bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Затемнение «в цвет фона»: тот же --color-bg-dark-2 (#363636), непрозрачность
+   высокая — фото остаётся лёгкой фактурой, текст берёт контраст с токена.
+   Фолбэк на rgb() для браузеров без color-mix(). */
+.reviews__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgb(54 54 54 / 95%); /* #363636 @ 95% — --color-bg-dark-2 */
+  background-color: color-mix(in srgb, var(--color-bg-dark-2) 95%, transparent);
+}
+
+.reviews__inner {
+  position: relative; /* выше слоя фона */
+  z-index: 1;
+  padding-top: var(--space-section-mobile);
+  padding-bottom: var(--space-section-mobile);
+}
+
+.reviews__eyebrow {
+  color: var(--color-text-muted-trust);
+}
+
+.reviews__title {
+  min-width: 0;
+  margin-top: 13px;
+  overflow-wrap: break-word;
+  font-size: var(--font-reviews-title);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--lh-tight);
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+}
+
+.reviews__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin-top: clamp(40px, 6vw, 72px);
+  list-style: none;
+}
+
+.reviews__item {
+  min-width: 0;
+  padding: 0 30px;
+  border-top: 1px solid var(--color-line-reviews);
+  cursor: pointer;
+}
+
+.reviews__item:last-child {
+  border-bottom: 1px solid var(--color-line-reviews);
+}
+
+.ui-review {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  height: 100%;
+  margin: 0;
+  padding: 28px 0;
+}
+
+.ui-review__text {
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: var(--font-review);
+  font-weight: var(--font-weight-light);
+  line-height: var(--lh-body);
+  color: var(--color-text-light);
+}
+
+.ui-review__text:empty {
+  display: none;
+}
+
+.ui-review__author {
+  margin-top: auto;
+  min-width: 0;
+  overflow-wrap: break-word;
+  font-size: var(--font-body);
+  font-weight: var(--font-weight-medium);
+  font-style: normal;
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+}
+
+.ui-review__meta {
+  display: block;
+  margin-top: 4px;
+  font-size: var(--font-eyebrow);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-muted-trust);
+}
+
+.ui-review__meta:empty {
+  display: none; /* нет контекста — нет дыры */
+}
+
+@media (min-width: 768px) {
+  .reviews__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 40px;
+  }
+
+  .reviews__item:nth-last-child(2):nth-child(odd) {
+    border-bottom: 1px solid var(--color-line-reviews);
+  }
+}
+
+@media (min-width: 1200px) {
+  .reviews__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 0;
+  }
+
+  .reviews__item {
+    padding: 0; /* до 1200 был горизонтальный отступ; здесь роль играют разделители */
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 1px solid var(--color-line-reviews);
+    cursor: pointer;
+  }
+
+  .reviews__item:last-child {
+    border-right: 1px solid var(--color-line-reviews);
+    border-bottom: 0;
+  }
+
+  .ui-review {
+    padding: 8px 28px 8px;
+  }
+}
+
+/* --- Слайдер: работает на всех разрешениях --- */
+.reviews__slider {
+  position: relative;
+  overflow: hidden; /* кадрируем ленту */
+  margin-top: clamp(40px, 6vw, 32px);
+}
+
+.reviews__slider .reviews__list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  will-change: transform;
+}
+
+/* Карточки: 1 в ряд на мобиле, 2 с 768, 4 с 1200 */
+.reviews__slider .reviews__item {
+  flex: 0 0 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.reviews__slider .reviews__item:last-child {
+  border-bottom: 1px solid var(--color-line-reviews);
+}
+
+@media (min-width: 768px) {
+  .reviews__slider .reviews__item {
+    flex: 0 0 50%;
+    min-width: 50%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .reviews__slider .reviews__item {
+    flex: 0 0 25%;
+    min-width: 25%;
+  }
+}
+
+/* Авто-прокрутка реализована в js/main.js (transform + таймер).
+   CSS-анимацию не используем: она конфликтует с inline-transform и даёт разрыв. */
