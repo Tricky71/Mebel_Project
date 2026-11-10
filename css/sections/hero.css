@@ -13,6 +13,7 @@
   background-color: var(--color-bg-dark);
   height: 100vh;
   max-height: 1080px;
+  min-height: 600px;
 }
 
 /* Фоновое фото: декор, перекрыто оверлеем */

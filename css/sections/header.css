@@ -18,8 +18,8 @@
   display: flex;
   align-items: center;
   min-height: var(--space-header-bar);
-  padding-top: 22px;
-  padding-bottom: 22px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .site-header__logo {
